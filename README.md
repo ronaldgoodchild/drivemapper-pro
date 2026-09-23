@@ -41,9 +41,11 @@ On first run the app creates `network_vault.json` (your saved drives), `sync_pro
 - [Sync Manager guide](docs/SYNC_MANAGER.txt)
 - [Full user manual](docs/USER_MANUAL.txt)
 
-## Security note
+## Security
 
-`network_vault.json` currently stores share passwords **in plain text**. Do not share that file and never commit it (it is in `.gitignore`). Moving credentials to the Windows Credential Manager is the top item on the [roadmap](ROADMAP.md) - contributions welcome.
+Share passwords are stored in **Windows Credential Manager** (service `DriveMapperPro`, one entry per drive letter), not in `network_vault.json`. The JSON file only records the drive letter, path, username and label. An older plain-text vault is migrated automatically the first time you launch this version.
+
+If the `keyring` package is missing the app warns you and falls back to plain text rather than losing your passwords - run `pip install keyring`. Still, treat `network_vault.json` as private and never commit it (it is in `.gitignore`).
 
 ## Contributing
 

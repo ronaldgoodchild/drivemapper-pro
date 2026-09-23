@@ -5,6 +5,12 @@ import win32wnet, win32netcon, win32api, win32file, winreg, win32gui, win32con
 import json, os, sys, subprocess, string, threading, time, datetime, socket
 from collections import defaultdict
 
+try:
+    import keyring  # passwords go to Windows Credential Manager, not the JSON file
+except ImportError:
+    keyring = None
+
+KEYRING_SERVICE = "DriveMapperPro"
 CONFIG_FILE = "network_vault.json"
 SYNC_CONFIG_FILE = "sync_profiles.json"
 LOG_FILE = "drive_events.log"
@@ -18,7 +24,11 @@ class DrivePro(ctk.CTk):
         ctk.set_appearance_mode("System")
         ctk.set_default_color_theme("blue")
         
+        self._pending_migration = False
         self.saved_drives = self.load_config()
+        if self._pending_migration:
+            self.save_config()  # moves legacy plain-text passwords into the credential vault
+            self.log_event("Migrated plain-text passwords to Windows Credential Manager")
         self.sync_profiles = self.load_sync_config()
         self.active_session_letters = set()
         self.server_connections = {}  # Track server-level connections
@@ -1652,6 +1662,33 @@ class DrivePro(ctk.CTk):
             self.destroy()
 
     # --- CONFIG MANAGEMENT ---
+    # Passwords live in Windows Credential Manager (service "DriveMapperPro",
+    # one entry per drive letter). The JSON file only records that one exists.
+    def _keyring_get(self, letter):
+        try:
+            return keyring.get_password(KEYRING_SERVICE, letter) or ""
+        except Exception as e:
+            self.log_event(f"CREDENTIAL READ ERROR for {letter}: {e}")
+            return ""
+
+    def _keyring_set(self, letter, password):
+        """Store (or clear) a password. Returns True if it is safely in the vault."""
+        try:
+            if password:
+                keyring.set_password(KEYRING_SERVICE, letter, password)
+            else:
+                self._keyring_delete(letter)
+            return True
+        except Exception as e:
+            self.log_event(f"CREDENTIAL WRITE ERROR for {letter}: {e}")
+            return False
+
+    def _keyring_delete(self, letter):
+        try:
+            keyring.delete_password(KEYRING_SERVICE, letter)
+        except Exception:
+            pass  # nothing stored under that letter
+
     def load_config(self):
         """Load saved drive configurations from JSON file."""
         if os.path.exists(CONFIG_FILE):
@@ -1660,6 +1697,14 @@ class DrivePro(ctk.CTk):
                     data = json.load(f)
                     if isinstance(data, list):
                         self.log_event(f"Loaded {len(data)} drive configurations")
+                        migrate = False
+                        for drive in data:
+                            if drive.pop('password_in_keyring', False) and keyring:
+                                drive['password'] = self._keyring_get(drive['letter'])
+                            elif drive.get('password') and keyring:
+                                migrate = True  # legacy plain-text file
+                        if migrate:
+                            self._pending_migration = True
                         return data
             except Exception as e:
                 self.log_event(f"CONFIG LOAD ERROR: {e}")
@@ -1667,11 +1712,29 @@ class DrivePro(ctk.CTk):
         return []
 
     def save_config(self):
-        """Save drive configurations to JSON file."""
+        """Save drive configurations to JSON file (passwords go to the credential vault)."""
         try:
+            to_write, plaintext_fallback = [], False
+            for drive in self.saved_drives:
+                entry = dict(drive)
+                password = entry.get('password', '')
+                if keyring and self._keyring_set(entry['letter'], password):
+                    entry.pop('password', None)
+                    if password:
+                        entry['password_in_keyring'] = True
+                elif password:
+                    plaintext_fallback = True  # vault unavailable: keep the password rather than lose it
+                to_write.append(entry)
             with open(CONFIG_FILE, "w", encoding="utf-8") as f:
-                json.dump(self.saved_drives, f, indent=4)
+                json.dump(to_write, f, indent=4)
             self.log_event(f"Saved {len(self.saved_drives)} drive configurations")
+            if plaintext_fallback:
+                self.log_event("WARNING: Windows Credential Manager unavailable - passwords saved in plain text")
+                messagebox.showwarning(
+                    "Passwords not encrypted",
+                    "Windows Credential Manager could not be used (is the 'keyring' package installed?).\n\n"
+                    "Your passwords were saved in plain text in network_vault.json. "
+                    "Run: pip install keyring")
         except Exception as e:
             self.log_event(f"CONFIG SAVE ERROR: {e}")
             messagebox.showerror("Save Error", f"Could not save configuration:\n{str(e)}")
@@ -1681,6 +1744,8 @@ class DrivePro(ctk.CTk):
         if messagebox.askyesno("Confirm Delete", f"Delete drive {drive['letter']}: configuration?"):
             if drive in self.saved_drives:
                 self.saved_drives.remove(drive)
+                if keyring:
+                    self._keyring_delete(drive['letter'])
                 self.save_config()
                 self.refresh_profile_ui()
                 self.update_suggested_letter()

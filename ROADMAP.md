@@ -9,8 +9,9 @@ Pick anything here - comment on (or open) an issue first so we don't duplicate w
 - [ ] Add screenshots to the README
 
 ## Security (highest priority)
-- [ ] Store share passwords in Windows Credential Manager (`keyring`) instead of plain-text `network_vault.json`
+- [x] Store share passwords in Windows Credential Manager (`keyring`) instead of plain-text `network_vault.json`
 - [ ] Redact usernames/IPs in `drive_events.log`
+- [ ] `rclone`/NFS mounts pass the password on the command line (visible to other local processes) - use a safer mechanism
 
 ## Features
 - [ ] Auto-reconnect drives at logon / scheduled task

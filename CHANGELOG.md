@@ -3,6 +3,11 @@
 Reconstructed from the original development history (February 2026). Older builds are kept
 outside this repo; see "History" in the README of the archive if you need them.
 
+## [Unreleased]
+- Security: share passwords are now stored in Windows Credential Manager (via `keyring`) instead of plain text in `network_vault.json`; existing vaults are migrated automatically on first launch
+- Falls back to plain text with a visible warning if the credential vault is unavailable, so passwords are never silently lost
+- Added `keyring` to requirements
+
 ## [6.0] - 2026-02-10
 - Fix: use `win32file.GetDriveType` (was incorrectly called on `win32api`), fixing drive-type detection
 - Example server addresses in built-in help/placeholders replaced with neutral values
