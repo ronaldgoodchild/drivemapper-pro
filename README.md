@@ -4,6 +4,11 @@ A free Windows GUI for people who manage lots of network drives: map SMB shares,
 
 > Built by a working IT technician for real-world file-server and home-lab use. Free to use, free to change.
 
+## Screenshots
+
+![Drive mapping with saved profiles and live status (fictional demo data)](docs/screenshots/main.png)
+*Drive mapping with saved profiles and live status (fictional demo data)*
+
 ## Features
 
 - **Drive mapper** - map/unmap network drives, pick drive letters, save credentials per share
