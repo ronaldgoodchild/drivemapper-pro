@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+build/
+dist/
+*.spec
+*.exe
+*.zip
+
+# Runtime data - never commit (contains credentials / machine info)
+network_vault.json
+sync_profiles.json
+drive_events.log
+*.log

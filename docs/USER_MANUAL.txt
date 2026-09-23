@@ -1,0 +1,4384 @@
+═══════════════════════════════════════════════════════════════════════════
+                    DRIVEMAPPER PRO v6.0 COMPLETE EDITION
+                         COMPREHENSIVE USER MANUAL
+═══════════════════════════════════════════════════════════════════════════
+
+TABLE OF CONTENTS
+═════════════════════════════════════════════════════════════════════════
+
+PART I: GETTING STARTED
+    1. Introduction .................................................... 5
+       1.1 What is DriveMapper Pro?
+       1.2 Key Features
+       1.3 System Requirements
+       1.4 What's New in v6.0
+    
+    2. Installation & Setup ............................................ 7
+       2.1 Installing Python Dependencies
+       2.2 Installing Rclone
+       2.3 First Launch
+       2.4 Configuration Files
+
+PART II: DRIVE MAPPER
+    3. Drive Mapping Basics ............................................ 10
+       3.1 Understanding Drive Mapping
+       3.2 Supported Protocols
+       3.3 Adding Your First Drive
+       3.4 Mapping vs Mounting
+    
+    4. SMB/CIFS Network Shares ......................................... 14
+       4.1 Adding SMB Shares
+       4.2 Authentication
+       4.3 Server Connection Management
+       4.4 Error 1219 Explained
+       4.5 Multiple Shares from Same Server
+    
+    5. Cloud Storage (Rclone) .......................................... 20
+       5.1 Configuring Rclone Remotes
+       5.2 Supported Cloud Providers
+       5.3 Mounting Cloud Drives
+       5.4 Performance Optimization
+    
+    6. SFTP & WebDAV ................................................... 24
+       6.1 SFTP Connections
+       6.2 WebDAV Connections
+       6.3 On-the-Fly Remotes
+    
+    7. NFS (Network File System) ....................................... 26
+       7.1 NFS Prerequisites
+       7.2 Adding NFS Shares
+       7.3 Troubleshooting NFS
+    
+    8. Advanced Drive Features ......................................... 28
+       8.1 Wake-on-LAN
+       8.2 Clone Drive Feature
+       8.3 Drive Status Monitoring
+       8.4 Server Preparation
+       8.5 Bulk Operations
+
+PART III: SYNC MANAGER
+    9. Sync Manager Overview ........................................... 33
+       9.1 What is Sync Manager?
+       9.2 Use Cases
+       9.3 Sync vs Backup
+    
+    10. Creating Sync Profiles ......................................... 35
+        10.1 Profile Configuration
+        10.2 Source and Destination
+        10.3 Bidirectional vs One-Way
+        10.4 Sync Options
+        10.5 Conflict Resolution
+    
+    11. Running Syncs .................................................. 40
+        11.1 Manual Sync Execution
+        11.2 Monitoring Progress
+        11.3 Sync Logs
+        11.4 Stopping Syncs
+    
+    12. Sync Scenarios ................................................. 43
+        12.1 Local to Cloud Backup
+        12.2 Bidirectional Cloud Sync
+        12.3 Server to Server Sync
+        12.4 Multi-Location Sync
+        12.5 Development Workflows
+
+PART IV: TROUBLESHOOTING & MAINTENANCE
+    13. Common Issues .................................................. 48
+        13.1 Error 1219 Resolution
+        13.2 Drive Not Showing in Status
+        13.3 Authentication Failures
+        13.4 Sync Conflicts
+        13.5 Performance Issues
+    
+    14. Diagnostic Tools ............................................... 53
+        14.1 Using the Test Button
+        14.2 Reading Logs
+        14.3 Debug Mode
+        14.4 Network Diagnostics
+    
+    15. Maintenance & Best Practices ................................... 56
+        15.1 Configuration Backups
+        15.2 Security Considerations
+        15.3 Performance Tuning
+        15.4 Scheduled Tasks
+
+PART V: ADVANCED TOPICS
+    16. Command Line Integration ....................................... 59
+        16.1 Rclone Commands
+        16.2 Scripting DriveMapper
+        16.3 Automation
+    
+    17. Network Architecture ........................................... 62
+        17.1 How Server Connections Work
+        17.2 Windows Network Stack
+        17.3 Security & Permissions
+    
+    18. Customization .................................................. 65
+        18.1 Configuration Files
+        18.2 Custom Rclone Flags
+        18.3 Advanced Sync Options
+
+PART VI: REFERENCE
+    19. Complete Feature Reference ..................................... 68
+        19.1 All Buttons & Functions
+        19.2 Keyboard Shortcuts
+        19.3 Configuration File Format
+        19.4 Error Codes
+    
+    20. FAQ ............................................................ 73
+        20.1 General Questions
+        20.2 Drive Mapping Questions
+        20.3 Sync Manager Questions
+        20.4 Technical Questions
+    
+    21. Glossary ....................................................... 78
+    22. Index .......................................................... 80
+
+
+═══════════════════════════════════════════════════════════════════════════
+PART I: GETTING STARTED
+═══════════════════════════════════════════════════════════════════════════
+
+
+CHAPTER 1: INTRODUCTION
+═══════════════════════════════════════════════════════════════════════════
+
+1.1 WHAT IS DRIVEMAPPER PRO?
+─────────────────────────────────────────────────────────────────────────
+
+DriveMapper Pro is a comprehensive network drive management and bidirectional
+sync solution for Windows. It combines the power of Windows network drive
+mapping with rclone's cloud capabilities to provide a unified interface for
+managing all your network storage.
+
+KEY CAPABILITIES:
+• Map network drives (SMB/CIFS, NFS, SFTP, WebDAV, Cloud)
+• Bidirectional synchronization between any two locations
+• Automatic server connection management
+• Wake-on-LAN support for sleeping servers
+• Real-time drive status monitoring
+• Clone configurations for quick setup
+
+
+1.2 KEY FEATURES
+─────────────────────────────────────────────────────────────────────────
+
+DRIVE MAPPER FEATURES:
+□ Multiple Protocol Support
+  - SMB/CIFS (Windows shares)
+  - Cloud storage (Google Drive, OneDrive, Dropbox, etc.)
+  - SFTP servers
+  - WebDAV servers
+  - NFS shares
+
+□ Intelligent Server Management
+  - Automatic server-level connection handling
+  - Error 1219 prevention
+  - Credential caching per server
+  - Connection status tracking
+
+□ Advanced Features
+  - Wake-on-LAN for sleeping devices
+  - Clone drive configurations
+  - Bulk mapping operations
+  - Live status monitoring
+  - Dual-method drive detection
+
+SYNC MANAGER FEATURES:
+□ Flexible Sync Options
+  - Bidirectional sync (rclone bisync)
+  - One-way sync (rclone sync)
+  - Multiple conflict resolution strategies
+  - Check access verification
+
+□ Universal Compatibility
+  - Local ↔ Local
+  - Local ↔ Cloud
+  - Local ↔ SMB Share
+  - Cloud ↔ Cloud
+  - SMB ↔ Cloud
+
+□ Professional Features
+  - Named sync profiles
+  - Progress monitoring
+  - Detailed logging
+  - Resync capability
+
+
+1.3 SYSTEM REQUIREMENTS
+─────────────────────────────────────────────────────────────────────────
+
+OPERATING SYSTEM:
+• Windows 10 (version 1809 or later)
+• Windows 11 (all versions)
+• Windows Server 2016 or later
+
+REQUIRED SOFTWARE:
+• Python 3.7 or later
+• customtkinter library
+• pywin32 library
+• rclone (latest stable version)
+
+OPTIONAL SOFTWARE:
+• NFS Client (for NFS shares - Windows Feature)
+
+NETWORK REQUIREMENTS:
+• Active network connection
+• Access to target servers/shares
+• Firewall rules permitting SMB (445), NFS (2049), etc.
+
+HARDWARE RECOMMENDATIONS:
+• 2 GB RAM minimum (4 GB recommended)
+• 100 MB free disk space
+• Network adapter
+
+
+1.4 WHAT'S NEW IN v6.0
+─────────────────────────────────────────────────────────────────────────
+
+MAJOR NEW FEATURES:
+✨ Sync Manager Tab
+   - Complete bidirectional sync solution
+   - Rclone bisync integration
+   - Profile-based sync management
+   - Conflict resolution options
+
+✨ Tabbed Interface
+   - Clean separation of Drive Mapper and Sync Manager
+   - Better organization
+   - Easier navigation
+
+IMPROVEMENTS FROM v5.5:
+✓ Enhanced UI with tabs
+✓ Sync profile management
+✓ Better status display
+✓ Improved error handling
+✓ More robust drive detection
+
+CARRIED FORWARD FROM v5.x:
+✓ Error 1219 automatic handling
+✓ Clone drive feature
+✓ Dual-method drive detection
+✓ Server connection tracking
+✓ Wake-on-LAN support
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+
+CHAPTER 2: INSTALLATION & SETUP
+═══════════════════════════════════════════════════════════════════════════
+
+2.1 INSTALLING PYTHON DEPENDENCIES
+─────────────────────────────────────────────────────────────────────────
+
+DriveMapper Pro requires Python 3.7+ and several libraries.
+
+STEP 1: Install Python
+1. Download Python from python.org
+2. Run installer
+3. ✓ Check "Add Python to PATH"
+4. Click "Install Now"
+5. Verify installation:
+   Open Command Prompt and type: python --version
+
+STEP 2: Install Required Libraries
+Open Command Prompt as Administrator and run:
+
+    pip install customtkinter
+    pip install pywin32
+
+These commands will install:
+• customtkinter - Modern UI framework
+• pywin32 - Windows API access for network operations
+
+VERIFICATION:
+Run this command to verify installation:
+    python -c "import customtkinter, win32wnet; print('Success!')"
+
+If you see "Success!", you're ready to proceed.
+
+
+2.2 INSTALLING RCLONE
+─────────────────────────────────────────────────────────────────────────
+
+Rclone is required for cloud storage and sync functionality.
+
+AUTOMATED INSTALLATION (Recommended):
+1. Download: https://rclone.org/downloads/
+2. Extract rclone.exe to C:\Windows
+   OR any folder in your PATH
+
+MANUAL INSTALLATION:
+1. Download rclone-windows-amd64.zip
+2. Extract to C:\rclone\
+3. Add C:\rclone\ to Windows PATH:
+   - Right-click "This PC" → Properties
+   - Advanced System Settings
+   - Environment Variables
+   - Edit "Path" under System Variables
+   - Add "C:\rclone\"
+   - Click OK
+
+VERIFICATION:
+Open Command Prompt and run:
+    rclone version
+
+You should see version information displayed.
+
+
+2.3 FIRST LAUNCH
+─────────────────────────────────────────────────────────────────────────
+
+LAUNCHING DRIVEMAPPER PRO:
+1. Navigate to the folder containing drivemapper_pro_v6.0_COMPLETE.py
+2. Right-click the file
+3. Select "Open with" → Python
+   OR
+   Open Command Prompt in the folder and run:
+       python drivemapper_pro_v6.0_COMPLETE.py
+
+FIRST RUN CHECKLIST:
+□ Application window opens
+□ Two tabs visible: "Drive Mapper" and "Sync Manager"
+□ No errors in console/logs
+□ Status panel shows "No network drives currently mapped"
+
+INITIAL CONFIGURATION:
+On first launch, DriveMapper Pro will create two configuration files:
+• network_vault.json - Stores drive configurations
+• sync_profiles.json - Stores sync profiles
+
+These files are created in the same folder as the application.
+
+
+2.4 CONFIGURATION FILES
+─────────────────────────────────────────────────────────────────────────
+
+NETWORK_VAULT.JSON:
+Stores all your drive configurations including:
+- Drive letters
+- Network paths
+- Credentials (stored in plain text - see Security section)
+- Protocol types
+- MAC addresses for WoL
+
+EXAMPLE:
+[
+    {
+        "letter": "Z",
+        "path": "\\\\192.168.1.50\\Media",
+        "username": "admin",
+        "password": "password123",
+        "label": "Media Server",
+        "protocol": "SMB",
+        "mac": "AA:BB:CC:DD:EE:FF"
+    }
+]
+
+SYNC_PROFILES.JSON:
+Stores sync configurations including:
+- Profile names
+- Source and destination paths
+- Sync options
+- Conflict resolution settings
+
+EXAMPLE:
+[
+    {
+        "name": "Documents Backup",
+        "source": "C:\\Users\\Me\\Documents",
+        "destination": "gdrive:Backup/Documents",
+        "bidirectional": true,
+        "conflict_resolve": "newer",
+        "check_access": true
+    }
+]
+
+BACKUP RECOMMENDATION:
+Always backup these files before:
+- Major updates
+- Configuration changes
+- System reinstalls
+
+Simply copy them to a safe location.
+
+
+═══════════════════════════════════════════════════════════════════════════
+PART II: DRIVE MAPPER
+═══════════════════════════════════════════════════════════════════════════
+
+
+CHAPTER 3: DRIVE MAPPING BASICS
+═══════════════════════════════════════════════════════════════════════════
+
+3.1 UNDERSTANDING DRIVE MAPPING
+─────────────────────────────────────────────────────────────────────────
+
+WHAT IS DRIVE MAPPING?
+Drive mapping assigns a drive letter (like Z:) to a network location,
+making it appear as a local drive in Windows Explorer.
+
+BENEFITS:
+• Easy access through File Explorer
+• Works with all Windows applications
+• Persistent across reboots (if configured)
+• No need to remember network paths
+
+DRIVE TYPES IN DRIVEMAPPER PRO:
+1. Network Drives (SMB/CIFS) - Traditional Windows shares
+2. Mounted Cloud Storage - Cloud providers as local drives
+3. SFTP Mounts - Remote Linux/Unix servers
+4. WebDAV Mounts - Web-based storage
+5. NFS Mounts - Unix/Linux file sharing
+
+
+3.2 SUPPORTED PROTOCOLS
+─────────────────────────────────────────────────────────────────────────
+
+SMB/CIFS (Server Message Block):
+• Windows file sharing protocol
+• Format: \\server\share or \\192.168.1.50\folder
+• Supports authentication
+• Native Windows support
+• Best for: Windows servers, NAS devices, Samba shares
+
+CLOUD (Rclone):
+• Supports 40+ cloud providers
+• Format: remotename:path
+• Requires rclone configuration
+• Best for: Google Drive, OneDrive, Dropbox, S3, etc.
+
+SFTP (SSH File Transfer Protocol):
+• Secure file transfer over SSH
+• Format: hostname or IP address
+• Requires SSH credentials
+• Best for: Linux servers, web hosts
+
+WebDAV (Web Distributed Authoring and Versioning):
+• HTTP-based file access
+• Format: hostname or URL
+• Supports HTTPS
+• Best for: Nextcloud, ownCloud, SharePoint
+
+NFS (Network File System):
+• Unix/Linux file sharing
+• Format: server:/export/path
+• Requires NFS client
+• Best for: Linux/Unix servers
+
+
+3.3 ADDING YOUR FIRST DRIVE
+─────────────────────────────────────────────────────────────────────────
+
+STEP-BY-STEP WALKTHROUGH:
+
+1. SELECT PROTOCOL
+   - Open the "Drive Mapper" tab
+   - Click the protocol dropdown (default: SMB)
+   - Choose your protocol type
+   - The path placeholder will update to show the correct format
+
+2. CHOOSE DRIVE LETTER
+   - DriveMapper Pro suggests an available letter
+   - You can change it if needed
+   - Letters A: and B: are reserved for floppy drives
+   - C: is your system drive
+   - Common practice: Use Z:, Y:, X:, etc. working backwards
+
+3. ENTER NETWORK PATH
+   For SMB: \\server\share
+   For Cloud: remotename:path
+   For SFTP: hostname.com
+   For WebDAV: webdav.hostname.com
+   For NFS: 192.168.1.60:/export/share
+
+4. AUTHENTICATION (If Required)
+   - Enter username
+   - Enter password
+   - Leave blank if no authentication needed
+
+5. OPTIONAL SETTINGS
+   - Display Name: Friendly name for this drive
+   - MAC Address: For Wake-on-LAN feature
+
+6. VALIDATE & ADD
+   - Click "✅ Validate & Add"
+   - DriveMapper Pro will test the connection
+   - If successful, drive is saved to your profile
+   - If failed, check logs for error details
+
+7. MAP THE DRIVE
+   - Find your drive in the "Saved Drive Profiles" section
+   - Click "▶ Map" button
+   - Drive should appear in File Explorer
+   - Status panel will update to show the mapped drive
+
+EXAMPLE: Adding a Windows Share
+Protocol: SMB
+Drive Letter: Z
+Path: \\192.168.1.50\Media
+Username: admin
+Password: mypassword
+Label: Media Server
+
+After clicking "Validate & Add" and then "Map", you'll have Z: drive
+pointing to your media server.
+
+
+3.4 MAPPING VS MOUNTING
+─────────────────────────────────────────────────────────────────────────
+
+TERMINOLOGY:
+• Mapping: Used for SMB/CIFS network shares
+• Mounting: Used for cloud storage, SFTP, WebDAV, NFS
+
+TECHNICAL DIFFERENCE:
+Mapping uses Windows native networking (WNetAddConnection2 API)
+Mounting uses rclone to create a virtual filesystem
+
+FROM USER PERSPECTIVE:
+Both appear as drive letters in File Explorer and work the same way.
+
+PERFORMANCE CONSIDERATIONS:
+• SMB Mapping: Direct network access, very fast
+• Rclone Mounting: Goes through rclone layer, slight overhead
+• Cloud Mounting: Depends on internet speed
+• Local caching can improve mounted drive performance
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+
+CHAPTER 4: SMB/CIFS NETWORK SHARES
+═══════════════════════════════════════════════════════════════════════════
+
+4.1 ADDING SMB SHARES
+─────────────────────────────────────────────────────────────────────────
+
+SMB (Server Message Block) is the standard Windows file sharing protocol.
+
+BASIC SETUP:
+1. Protocol: Select "SMB"
+2. Path Format: \\server\sharename
+   Examples:
+   - \\192.168.1.50\Media
+   - \\FILESERVER\Public
+   - \\nas.local\backup
+
+3. Authentication:
+   - Domain users: DOMAIN\username
+   - Local users: username
+   - Leave blank for guest access
+
+TIPS FOR PATH ENTRY:
+• Use IP addresses for more reliable connections
+• Server names require DNS or WINS resolution
+• Avoid spaces in share names when possible
+• Case doesn't matter for Windows shares
+
+
+4.2 AUTHENTICATION
+─────────────────────────────────────────────────────────────────────────
+
+THREE AUTHENTICATION SCENARIOS:
+
+1. GUEST ACCESS (No Credentials)
+   - Leave username and password blank
+   - Works for public shares
+   - Limited permissions
+
+2. LOCAL USER
+   - Username: admin
+   - Password: password123
+   - Authenticates against server's local accounts
+
+3. DOMAIN USER
+   - Username: COMPANY\john.doe
+   - Password: domain_password
+   - Authenticates against Active Directory
+
+SECURITY NOTE:
+Credentials are stored in plain text in network_vault.json
+See Security Considerations (Chapter 15.2) for details.
+
+
+4.3 SERVER CONNECTION MANAGEMENT
+─────────────────────────────────────────────────────────────────────────
+
+DriveMapper Pro implements intelligent server-level connection management
+to avoid Windows error 1219.
+
+HOW IT WORKS:
+1. When you add multiple shares from the same server, DriveMapper Pro
+   groups them together
+
+2. Before mapping drives, it establishes a connection to the server's
+   IPC$ share (administrative share) with your credentials
+
+3. Subsequent drive mappings use this existing server session instead
+   of creating new authenticated connections
+
+4. This prevents error 1219: "Multiple connections to a server...using
+   more than one user name, are not allowed"
+
+VISUAL INDICATORS:
+In the "Saved Drive Profiles" section, drives are grouped by server:
+
+    📁 Server: \\192.168.1.50
+    Z: | Media Server | SMB | User: admin
+    Y: | Documents | SMB | User: admin
+    X: | Photos | SMB | User: admin
+    
+    📁 Server: \\192.168.1.51
+    W: | Backup | SMB | User: backup_user
+
+This grouping shows that Z:, Y:, and X: all connect to the same server
+and MUST use the same credentials.
+
+
+4.4 ERROR 1219 EXPLAINED
+─────────────────────────────────────────────────────────────────────────
+
+WHAT IS ERROR 1219?
+Full error message:
+"Multiple connections to a server or shared resource by the same user,
+using more than one user name, are not allowed. Disconnect all previous
+connections to the server or shared resource and try again."
+
+WHY IT HAPPENS:
+Windows only allows ONE set of credentials per server. If you try to
+map multiple shares from the same server with different usernames or
+passwords, Windows refuses the connection.
+
+COMMON CAUSES:
+1. Mapping shares with different usernames
+2. Mixing authenticated and non-authenticated connections
+3. Previous connections not properly closed
+
+HOW DRIVEMAPPER PRO FIXES IT:
+1. SERVER PREPARATION
+   Click "🔧 Prepare" to establish server connections before mapping
+
+2. AUTOMATIC GROUPING
+   DriveMapper Pro detects shares from the same server and ensures
+   they use the same credentials
+
+3. CLEAR CONNECTIONS
+   Click "🔓 Clear" to disconnect all server sessions and start fresh
+
+MANUAL RESOLUTION:
+If you encounter error 1219:
+1. Click "⏹ Disconnect All" to clear everything
+2. Ensure all drives from the same server use SAME credentials
+3. Click "🔧 Prepare" to establish server connections
+4. Click "▶▶ Map All" to map all drives
+
+
+4.5 MULTIPLE SHARES FROM SAME SERVER
+─────────────────────────────────────────────────────────────────────────
+
+BEST PRACTICES:
+
+1. USE CONSISTENT CREDENTIALS
+   If mapping \\192.168.1.50\c, \\192.168.1.50\d, \\192.168.1.50\e
+   ALL of them must use the SAME username and password
+
+2. USE THE CLONE FEATURE
+   After adding the first share:
+   - Click "📋 Clone" on that drive
+   - Change only the path (e.g., \c → \d)
+   - Click "Validate & Add"
+   - Credentials are automatically the same!
+
+3. PREPARE BEFORE MAPPING
+   For multiple drives from the same server:
+   Step 1: Click "🔧 Prepare"
+   Step 2: Wait for success message
+   Step 3: Click "▶▶ Map All"
+
+EXAMPLE WORKFLOW:
+You have 4 shares on \\192.168.1.50:
+- \\192.168.1.50\c (C drive)
+- \\192.168.1.50\d (D drive)
+- \\192.168.1.50\e (E drive)
+- \\192.168.1.50\f (F drive)
+
+Step 1: Add the first share (Z: → \\192.168.1.50\c)
+        Username: admin
+        Password: password123
+
+Step 2: Click "📋 Clone" on Z:
+        Change path to \\192.168.1.50\d
+        Drive letter auto-fills as Y:
+        Click "Validate & Add"
+
+Step 3: Repeat for remaining shares
+
+Step 4: Click "🔧 Prepare"
+
+Step 5: Click "▶▶ Map All"
+
+Result: All 4 drives mapped using the same credentials
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+
+CHAPTER 5: CLOUD STORAGE (RCLONE)
+═══════════════════════════════════════════════════════════════════════════
+
+5.1 CONFIGURING RCLONE REMOTES
+─────────────────────────────────────────────────────────────────────────
+
+Before you can use cloud storage in DriveMapper Pro, you must configure
+rclone remotes.
+
+WHAT IS A REMOTE?
+A "remote" is rclone's term for a configured cloud storage connection.
+Each remote has a name (like "gdrive" or "onedrive") and authentication
+details.
+
+CONFIGURING A REMOTE:
+
+METHOD 1: Using DriveMapper Pro
+1. Click "☁️ Rclone Config" button in the header
+2. A console window opens with rclone config
+3. Choose "n" for New remote
+4. Enter a name (e.g., "gdrive")
+5. Choose provider (e.g., "drive" for Google Drive)
+6. Follow authentication prompts
+7. Type "q" to quit when done
+
+METHOD 2: Command Line
+1. Open Command Prompt
+2. Run: rclone config
+3. Follow the same steps as above
+
+EXAMPLE: Google Drive Setup
+```
+n) New remote
+name> gdrive
+Storage> drive
+client_id> [Press Enter for default]
+client_secret> [Press Enter for default]
+scope> 1  (Full access)
+root_folder_id> [Press Enter]
+service_account_file> [Press Enter]
+Edit advanced config? n
+Use auto config? Y
+[Browser opens for authorization]
+Configure this as a team drive? n
+y) Yes this is OK
+q) Quit config
+```
+
+VERIFICATION:
+After configuration, test your remote:
+    rclone lsd remotename:
+
+Example:
+    rclone lsd gdrive:
+
+You should see your Google Drive folders listed.
+
+
+5.2 SUPPORTED CLOUD PROVIDERS
+─────────────────────────────────────────────────────────────────────────
+
+Rclone supports 40+ cloud storage providers. Popular ones include:
+
+MAJOR PROVIDERS:
+• Google Drive (drive)
+• Microsoft OneDrive (onedrive)
+• Dropbox (dropbox)
+• Amazon S3 (s3)
+• Microsoft Azure Blob Storage (azureblob)
+• Google Cloud Storage (google cloud storage)
+• Backblaze B2 (b2)
+• Box (box)
+• pCloud (pcloud)
+• Mega (mega)
+
+BUSINESS PROVIDERS:
+• Microsoft SharePoint (sharepoint)
+• Google Workspace (drive with team drives)
+• Dropbox Business (dropbox)
+
+OTHER STORAGE:
+• FTP/FTPS (ftp)
+• SFTP (sftp)
+• HTTP (http)
+• WebDAV (webdav)
+• Local Filesystem (local)
+
+For complete list and setup instructions:
+https://rclone.org/overview/
+
+
+5.3 MOUNTING CLOUD DRIVES
+─────────────────────────────────────────────────────────────────────────
+
+Once you have a configured remote, you can mount it as a drive letter.
+
+ADDING A CLOUD DRIVE:
+
+1. Protocol: Select "Cloud (Rclone)"
+
+2. Drive Letter: Choose available letter (e.g., C)
+
+3. Path: Enter remote name with colon
+   Format: remotename:path
+   
+   Examples:
+   - gdrive:            (Root of Google Drive)
+   - gdrive:Backup      (Backup folder in Google Drive)
+   - onedrive:Documents (Documents folder in OneDrive)
+   - dropbox:/Photos    (Photos folder in Dropbox)
+
+4. Authentication: Leave blank (handled by rclone config)
+
+5. Click "Validate & Add"
+
+6. Click "▶ Map" to mount the drive
+
+MOUNTING OPTIONS:
+Rclone mount uses VFS (Virtual File System) with these defaults:
+- Cache mode: writes
+- No console window
+- Background operation
+
+PERFORMANCE:
+Cloud mounts may have latency depending on:
+• Internet connection speed
+• Cloud provider's servers
+• File sizes
+• Cache settings
+
+
+5.4 PERFORMANCE OPTIMIZATION
+─────────────────────────────────────────────────────────────────────────
+
+TIPS FOR FASTER CLOUD DRIVES:
+
+1. USE CACHING
+   Rclone caches file data locally for faster access
+   Default: --vfs-cache-mode writes
+   Advanced: Can be changed to "full" for aggressive caching
+
+2. STABLE INTERNET CONNECTION
+   • Wired connection preferred over WiFi
+   • Minimum 10 Mbps for good performance
+   • Low latency important for metadata operations
+
+3. LIMIT SIMULTANEOUS OPERATIONS
+   Don't copy hundreds of small files at once
+   Cloud providers rate-limit requests
+
+4. USE APPROPRIATE PROVIDERS
+   For frequent access: Google Drive, OneDrive (good performance)
+   For archival: Backblaze B2, Glacier (slower but cheaper)
+
+5. REGIONAL CONSIDERATIONS
+   Choose cloud provider with servers near your location
+
+ADVANCED RCLONE FLAGS:
+For power users, you can manually add flags when mounting:
+```bash
+rclone mount gdrive: X: --vfs-cache-mode full --vfs-cache-max-size 10G
+```
+
+This enables full caching with 10GB cache limit.
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+
+CHAPTER 6: SFTP & WEBDAV
+═══════════════════════════════════════════════════════════════════════════
+
+6.1 SFTP CONNECTIONS
+─────────────────────────────────────────────────────────────────────────
+
+SFTP (SSH File Transfer Protocol) provides secure file access to remote
+servers over SSH.
+
+ADDING AN SFTP DRIVE:
+
+1. Protocol: Select "SFTP"
+
+2. Drive Letter: Choose available letter
+
+3. Path: Enter hostname or IP
+   Examples:
+   - myserver.com
+   - 192.168.1.100
+   - sftp.example.com
+
+4. Username: SSH username
+
+5. Password: SSH password
+   NOTE: Key-based authentication requires rclone config
+
+6. Click "Validate & Add" then "Map"
+
+ON-THE-FLY SFTP:
+DriveMapper Pro creates an on-the-fly rclone remote for SFTP without
+requiring manual rclone configuration. The credentials you enter are
+passed directly to rclone.
+
+Format used internally:
+:sftp,host=hostname,user=username,pass=password:
+
+LIMITATIONS:
+• Password authentication only (for quick setup)
+• For key-based auth, use rclone config and "Cloud (Rclone)" protocol
+• Performance depends on server and network
+
+
+6.2 WEBDAV CONNECTIONS
+─────────────────────────────────────────────────────────────────────────
+
+WebDAV provides file access over HTTP/HTTPS.
+
+COMMON WEBDAV SERVERS:
+• Nextcloud
+• ownCloud
+• SharePoint
+• Box
+• Many NAS devices
+
+ADDING A WEBDAV DRIVE:
+
+1. Protocol: Select "WebDAV"
+
+2. Drive Letter: Choose available letter
+
+3. Path: Enter hostname (WITHOUT https://)
+   Examples:
+   - cloud.example.com
+   - nextcloud.myserver.com
+   - 10.0.0.50
+
+4. Username: WebDAV username
+
+5. Password: WebDAV password
+
+6. Click "Validate & Add" then "Map"
+
+HTTPS:
+DriveMapper Pro automatically uses HTTPS for WebDAV connections.
+
+ON-THE-FLY WEBDAV:
+Similar to SFTP, WebDAV is configured on-the-fly:
+:webdav,url=https://hostname,user=username,pass=password:
+
+
+6.3 ON-THE-FLY REMOTES
+─────────────────────────────────────────────────────────────────────────
+
+WHAT ARE ON-THE-FLY REMOTES?
+Instead of pre-configuring remotes in rclone, DriveMapper Pro can create
+temporary remotes using special syntax.
+
+BENEFITS:
+• No rclone configuration needed
+• Quick one-time access
+• Credentials entered in DriveMapper Pro UI
+
+DRAWBACKS:
+• Limited to basic authentication
+• No advanced options
+• Not saved in rclone config
+
+WHEN TO USE EACH:
+
+Use On-The-Fly (SFTP/WebDAV protocols):
+• Quick temporary access
+• Simple password authentication
+• One-time connections
+
+Use Rclone Config (Cloud protocol):
+• Permanent remotes
+• OAuth authentication (Google, Microsoft, etc.)
+• Advanced options needed
+• Better performance
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+
+CHAPTER 7: NFS (NETWORK FILE SYSTEM)
+═══════════════════════════════════════════════════════════════════════════
+
+7.1 NFS PREREQUISITES
+─────────────────────────────────────────────────────────────────────────
+
+NFS is primarily used for Linux/Unix file sharing.
+
+WINDOWS NFS CLIENT:
+Windows 10/11 Pro and Enterprise include an NFS client, but it's not
+enabled by default.
+
+ENABLING NFS CLIENT:
+
+Method 1: Settings (Windows 10/11)
+1. Open Settings
+2. Apps → Optional Features
+3. Add a feature
+4. Search for "NFS"
+5. Install "Services for NFS"
+6. Reboot
+
+Method 2: Control Panel
+1. Control Panel → Programs and Features
+2. Turn Windows features on or off
+3. Check "Services for NFS"
+4. Click OK
+5. Reboot
+
+Method 3: PowerShell (Administrator)
+```powershell
+Enable-WindowsOptionalFeature -Online -FeatureName ServicesForNFS-ClientOnly
+```
+
+VERIFICATION:
+Open Command Prompt and run:
+    showmount -e nfs_server_ip
+
+If you see exports listed, NFS client is working.
+
+
+7.2 ADDING NFS SHARES
+─────────────────────────────────────────────────────────────────────────
+
+PATH FORMAT:
+NFS uses a different format than SMB:
+    server_ip:/export/path
+
+Examples:
+- 10.0.0.50:/mnt/storage
+- 192.168.1.100:/export/share
+- nfs.server.com:/data
+
+ADDING AN NFS DRIVE:
+
+1. Protocol: Select "NFS"
+
+2. Drive Letter: Choose available letter
+
+3. Path: Enter NFS export path
+   Format: server:/path
+   Example: 10.0.0.50:/mnt/storage
+
+4. Authentication: Leave blank (NFS uses host-based authentication)
+
+5. Click "Validate & Add" then "Map"
+
+NFS MOUNT OPTIONS:
+DriveMapper Pro uses basic NFS mount options:
+    mount -o anon server:/path X:
+
+For advanced options, you may need to use Windows mount command directly.
+
+
+7.3 TROUBLESHOOTING NFS
+─────────────────────────────────────────────────────────────────────────
+
+COMMON NFS ISSUES:
+
+1. "NFS client is not installed"
+   Solution: Install NFS client (see 7.1)
+
+2. "Network path not found"
+   Causes:
+   - NFS server not accessible
+   - Export path incorrect
+   - Firewall blocking port 2049
+   Solution: Test with: showmount -e server_ip
+
+3. "Access denied"
+   Causes:
+   - NFS export not configured for your IP
+   - Insufficient permissions
+   Solution: Check NFS server export configuration
+
+4. "Operation not supported"
+   Causes:
+   - NFSv4 vs NFSv3 incompatibility
+   - Server doesn't support requested operation
+   Solution: Verify NFS version compatibility
+
+NFS SERVER CONFIGURATION (Linux):
+On the NFS server, ensure exports are configured:
+```bash
+# /etc/exports
+/mnt/storage    10.0.0.0/24(rw,sync,no_subtree_check)
+```
+
+Then restart NFS:
+```bash
+sudo exportfs -ra
+sudo systemctl restart nfs-server
+```
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+
+CHAPTER 8: ADVANCED DRIVE FEATURES
+═══════════════════════════════════════════════════════════════════════════
+
+8.1 WAKE-ON-LAN
+─────────────────────────────────────────────────────────────────────────
+
+Wake-on-LAN (WoL) allows you to wake up sleeping or powered-off network
+devices remotely.
+
+USE CASE:
+Your NAS or server goes to sleep to save power. Before mapping drives,
+you want to wake it up automatically.
+
+SETUP REQUIREMENTS:
+
+On the Target Device (NAS/Server):
+1. Enable WoL in BIOS/UEFI
+2. Enable WoL in network adapter settings
+3. Note the MAC address of the network adapter
+
+On DriveMapper Pro:
+1. When adding a drive, enter the MAC address
+   Format: AA:BB:CC:DD:EE:FF
+   Also accepts: AA-BB-CC-DD-EE-FF
+
+USING WOL:
+
+1. Locate your drive in "Saved Drive Profiles"
+2. Click "⚡ Wake" button
+3. Magic packet is sent to the device
+4. Wait 10-30 seconds for device to wake up
+5. Click "▶ Map" to map the drive
+
+TIPS:
+• Wired connections work better than WiFi for WoL
+• Some routers may block WoL packets
+• Device must support WoL (check manual)
+• Power saving modes affect WoL reliability
+
+TECHNICAL DETAILS:
+WoL sends a "magic packet" containing:
+- 6 bytes of 0xFF (broadcast)
+- 16 repetitions of the target MAC address
+- Sent as UDP broadcast on port 9
+
+
+8.2 CLONE DRIVE FEATURE
+─────────────────────────────────────────────────────────────────────────
+
+The Clone feature is a time-saver when adding multiple similar drives.
+
+WHEN TO USE:
+• Multiple shares from the same server
+• Same credentials, different paths
+• Similar configurations with minor changes
+
+HOW IT WORKS:
+
+1. Find an existing drive in "Saved Drive Profiles"
+
+2. Click "📋 Clone" button
+
+3. All settings are copied to the "Add New Drive" form:
+   - Protocol
+   - Path (you can change this)
+   - Username
+   - Password
+   - MAC address
+   - Label
+
+4. Next available drive letter is auto-filled
+
+5. Modify only what you need to change
+
+6. Click "Validate & Add"
+
+EXAMPLE SCENARIO:
+You have Z: → \\192.168.1.50\Media
+You want Y: → \\192.168.1.50\Documents
+
+Without Clone:
+1. Select SMB
+2. Enter Y
+3. Type \\192.168.1.50\Documents
+4. Type username
+5. Type password
+6. Validate & Add
+
+With Clone:
+1. Click "📋 Clone" on Z:
+2. Change path from \Media to \Documents
+3. Validate & Add
+
+Saves time and prevents typos!
+
+
+8.3 DRIVE STATUS MONITORING
+─────────────────────────────────────────────────────────────────────────
+
+The "Live Drive Status" panel shows real-time information about your
+mapped drives.
+
+INFORMATION DISPLAYED:
+
+For Each Drive:
+💾 Z: → \\192.168.1.50\Media
+   Latency: 5ms
+
+• Drive letter
+• Network path or remote name
+• Latency (network response time)
+
+Total Count:
+Total: 4 mapped drive(s)
+
+Server Connections:
+🔗 \\192.168.1.50
+   User: admin
+
+• Active server sessions
+• Authenticated user for each server
+
+REFRESH OPTIONS:
+
+🔄 REFRESH:
+Manually refresh the status display
+
+🔍 TEST:
+Opens diagnostic window showing:
+- net use command output
+- PowerShell Get-PSDrive output
+- Python win32api detection results
+
+Use this when drives aren't showing in status but are visible in Explorer.
+
+AUTO-REFRESH:
+Status automatically refreshes every 30 seconds in the background.
+
+DUAL-METHOD DETECTION:
+DriveMapper Pro uses two methods to detect drives:
+1. Windows API (win32api) - Fast, direct
+2. net use command - Fallback, always accurate
+
+If one method fails, the other catches your drives!
+
+
+8.4 SERVER PREPARATION
+─────────────────────────────────────────────────────────────────────────
+
+The "Prepare" button establishes server-level connections before mapping
+drives. This is crucial for avoiding error 1219.
+
+HOW IT WORKS:
+
+1. Click "🔧 Prepare" button
+
+2. DriveMapper Pro analyzes your saved drives
+
+3. Groups drives by server address
+
+4. For each unique server:
+   - Connects to \\server\IPC$ with credentials
+   - Establishes authenticated session
+   - Stores connection information
+
+5. Shows success message:
+   "Successfully connected to X server(s)"
+
+WHEN TO USE:
+
+Use "Prepare" before:
+• Mapping multiple drives from same server
+• After clicking "Clear Servers"
+• After a network disconnect
+• On application startup
+
+DON'T NEED "Prepare" for:
+• Single drive mapping
+• Drives from different servers
+• Cloud/SFTP/WebDAV drives (they don't use server connections)
+
+WORKFLOW:
+1. Configure all your drives
+2. Click "🔧 Prepare"
+3. Click "▶▶ Map All"
+
+This ensures all server connections are established with the correct
+credentials before any drive mapping attempts.
+
+
+8.5 BULK OPERATIONS
+─────────────────────────────────────────────────────────────────────────
+
+BULK OPERATIONS:
+
+▶▶ MAP ALL:
+Maps all saved drive configurations in one click.
+
+Process:
+1. Automatically runs "Prepare Servers"
+2. Waits 1 second for connections to establish
+3. Maps each drive in sequence
+4. Shows summary: "Successfully mapped: X, Failed: Y"
+5. Refreshes status display
+
+Best used:
+- On application startup
+- After system reboot
+- After network reconnection
+
+⏹ DISCONNECT ALL:
+Disconnects all network drives and stops all mounts.
+
+Process:
+1. Runs: net use * /delete /yes (disconnects all SMB drives)
+2. Runs: taskkill /f /im rclone.exe (stops all rclone mounts)
+3. Clears server connection cache
+4. Shows confirmation: "All network drives have been disconnected"
+
+Best used:
+- Before system shutdown
+- When switching networks
+- To resolve connection issues
+- Before reconfiguring drives
+
+🔓 CLEAR SERVERS:
+Clears server-level connections without disconnecting drives.
+
+Process:
+1. Disconnects from each server's IPC$ share
+2. Clears server connection cache
+3. Leaves actual drive mappings intact
+
+Best used:
+- Before changing credentials
+- When encountering error 1219
+- To reset authentication state
+
+DIFFERENCE BETWEEN "DISCONNECT ALL" AND "CLEAR SERVERS":
+
+Disconnect All:
+- Unmaps ALL drives (they disappear from File Explorer)
+- Stops all rclone processes
+- Complete clean slate
+
+Clear Servers:
+- Keeps drives mapped
+- Only clears authentication sessions
+- Use when drives are working but you need to change credentials
+
+
+═══════════════════════════════════════════════════════════════════════════
+PART III: SYNC MANAGER
+═══════════════════════════════════════════════════════════════════════════
+
+
+CHAPTER 9: SYNC MANAGER OVERVIEW
+═══════════════════════════════════════════════════════════════════════════
+
+9.1 WHAT IS SYNC MANAGER?
+─────────────────────────────────────────────────────────────────────────
+
+Sync Manager is a profile-based synchronization tool that uses rclone
+to keep directories synchronized.
+
+KEY FEATURES:
+• Bidirectional sync (keeps both sides identical)
+• One-way sync (copies from source to destination)
+• Works with any combination of local, cloud, SMB, FTP
+• Conflict resolution strategies
+• Named profiles for different sync tasks
+• Progress monitoring and logging
+
+RCLONE INTEGRATION:
+Sync Manager uses two rclone commands:
+- rclone bisync: Bidirectional synchronization
+- rclone sync: One-way synchronization
+
+
+9.2 USE CASES
+─────────────────────────────────────────────────────────────────────────
+
+BACKUP & DISASTER RECOVERY:
+• Backup documents to cloud storage
+• Mirror important files to external drive
+• Offsite backup to remote server
+
+MULTI-LOCATION WORKFLOWS:
+• Sync laptop and desktop computers
+• Keep home and office files synchronized
+• Collaborate across multiple devices
+
+CLOUD TO CLOUD:
+• Copy Google Drive to OneDrive
+• Backup one cloud provider to another
+• Migrate between cloud services
+
+DEVELOPMENT:
+• Sync code between local and remote servers
+• Keep multiple dev environments synchronized
+• Backup project files to cloud
+
+MEDIA MANAGEMENT:
+• Sync photo library to NAS
+• Backup video files to cloud storage
+• Mirror media collection across devices
+
+
+9.3 SYNC VS BACKUP
+─────────────────────────────────────────────────────────────────────────
+
+UNDERSTANDING THE DIFFERENCE:
+
+SYNC (Bidirectional):
+• Changes propagate in both directions
+• Keeps two locations identical
+• Deleting on one side deletes on other
+• Use for: Active collaboration, multi-device workflows
+
+SYNC (One-Way):
+• Changes go from source to destination only
+• Destination mirrors source
+• Can delete files on destination that don't exist in source
+• Use for: Backups, archival, mirroring
+
+BACKUP (Not just sync):
+True backup includes:
+• Version history (rclone doesn't do this natively)
+• Point-in-time recovery
+• Deletion protection
+
+Sync Manager provides sync, not comprehensive backup. For critical data:
+• Use multiple backup strategies
+• Keep offline backups
+• Test recovery procedures
+• Use versioning cloud storage
+
+WHEN TO USE SYNC MANAGER:
+✓ Keeping folders synchronized
+✓ One-way backups to cloud/server
+✓ Mirroring directories
+✓ Development workflows
+
+WHEN NOT TO USE SYNC MANAGER:
+✗ Recovering accidentally deleted files (no version history)
+✗ Point-in-time restore
+✗ Ransomware protection (sync will propagate encryption)
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+
+CHAPTER 10: CREATING SYNC PROFILES
+═══════════════════════════════════════════════════════════════════════════
+
+10.1 PROFILE CONFIGURATION
+─────────────────────────────────────────────────────────────────────────
+
+A sync profile defines a synchronization task with all its settings.
+
+PROFILE FIELDS:
+
+1. Profile Name
+   - Descriptive name for this sync task
+   - Examples: "Documents Backup", "Photo Sync", "Work Files"
+   - Used in UI and log files
+
+2. Source Location
+   - Where to sync FROM
+   - Can be local path, UNC path, or rclone remote
+
+3. Destination Location
+   - Where to sync TO
+   - Same format options as source
+
+4. Sync Options (Checkboxes)
+   - Bidirectional (bisync)
+   - Delete files on destination
+   - Check access
+   - Force resync
+
+5. Conflict Resolution
+   - Strategy for handling conflicts
+   - See section 10.5
+
+
+10.2 SOURCE AND DESTINATION
+─────────────────────────────────────────────────────────────────────────
+
+LOCATION FORMATS:
+
+Local Directory:
+    C:\Users\Me\Documents
+    D:\Photos
+    E:\Projects
+
+UNC Path (Network Share):
+    \\192.168.1.50\Media
+    \\server\backup
+    \\nas\photos
+
+Rclone Remote:
+    gdrive:Backup
+    onedrive:Documents
+    dropbox:/Photos
+
+Mixed Examples:
+    Source: C:\Documents
+    Dest:   gdrive:Backup/Documents
+    
+    Source: \\192.168.1.50\Media
+    Dest:   onedrive:MediaBackup
+    
+    Source: gdrive:Work
+    Dest:   dropbox:/WorkBackup
+
+BROWSING:
+Click "📁 Browse" button to select local directories.
+For network shares and cloud remotes, type them manually.
+
+PATH TIPS:
+• Use forward slashes OR backslashes (Windows accepts both)
+• Trailing slashes matter for some operations
+• Spaces in paths are okay
+• Quote paths with spaces if using manual rclone commands
+
+
+10.3 BIDIRECTIONAL VS ONE-WAY
+─────────────────────────────────────────────────────────────────────────
+
+BIDIRECTIONAL SYNC (BISYNC):
+
+What it does:
+• Tracks changes on both sides
+• Synchronizes changes in both directions
+• Keeps both locations identical
+
+How it works:
+1. First run creates baseline listings
+2. Subsequent runs detect changes on each side
+3. Applies changes to opposite side
+4. Handles conflicts based on resolution strategy
+
+Use when:
+• You work on multiple computers
+• Collaborating with shared folders
+• Want automatic two-way sync
+• Both sides are "active"
+
+Example:
+Laptop Documents ⟷ Desktop Documents
+Changes on laptop sync to desktop, vice versa
+
+Requirements:
+• Source and destination must be accessible
+• Both sides must be in consistent state
+• First run needs --resync flag
+
+
+ONE-WAY SYNC:
+
+What it does:
+• Copies from source to destination
+• Destination becomes mirror of source
+• Source remains unchanged
+
+How it works:
+1. Lists files in source
+2. Compares with destination
+3. Copies new/changed files to destination
+4. Optionally deletes extra files on destination
+
+Use when:
+• Creating backups
+• Source is primary, destination is copy
+• Only care about preserving source
+• Don't want changes on destination
+
+Example:
+C:\Documents → gdrive:Backup
+Anything in C:\Documents is backed up to Google Drive
+
+Caution:
+With "delete on destination" enabled, files only in destination
+will be deleted!
+
+
+10.4 SYNC OPTIONS
+─────────────────────────────────────────────────────────────────────────
+
+OPTION: BIDIRECTIONAL (BISYNC)
+☑ Enabled: Uses rclone bisync for two-way sync
+☐ Disabled: Uses rclone sync for one-way sync
+
+Impact:
+Changes which rclone command is used and sync behavior.
+
+
+OPTION: DELETE FILES ON DESTINATION
+(Only for one-way sync)
+
+☑ Enabled: Files on destination not in source are deleted
+☐ Disabled: Extra files on destination are left alone
+
+Example:
+Source has: file1.txt, file2.txt
+Dest has:   file1.txt, file2.txt, file3.txt
+
+With delete enabled:
+After sync, dest has: file1.txt, file2.txt
+(file3.txt was deleted)
+
+With delete disabled:
+After sync, dest has: file1.txt, file2.txt, file3.txt
+(file3.txt kept)
+
+Caution:
+Use carefully! Can cause data loss if misconfigured.
+
+
+OPTION: CHECK ACCESS (RECOMMENDED FOR BISYNC)
+☑ Enabled: Adds --check-access flag
+☐ Disabled: No access checking
+
+What it does:
+Creates RCLONE_TEST file in both locations to verify write access.
+If files are missing, bisync aborts to prevent data loss.
+
+Recommendation:
+Always enable for bidirectional sync.
+Prevents accidental one-way sync if destination is inaccessible.
+
+
+OPTION: FORCE RESYNC (INITIAL SYNC)
+☑ Enabled: Runs with --resync flag
+☐ Disabled: Normal sync
+
+When to enable:
+• First sync of a profile
+• After changes outside DriveMapper Pro
+• To rebuild sync database
+• After conflicts or errors
+
+What it does:
+Recreates baseline listings without sync direction history.
+All files copied to bring sides into sync.
+
+Auto-clear:
+DriveMapper Pro automatically disables this after first successful run.
+
+
+10.5 CONFLICT RESOLUTION
+─────────────────────────────────────────────────────────────────────────
+
+When the same file is modified on both sides, a conflict occurs.
+
+RESOLUTION STRATEGIES:
+
+NONE (Default):
+• Rclone creates duplicate files with conflict suffix
+• Both versions preserved
+• You manually resolve later
+• Safest option
+
+Example conflict:
+    document.txt
+    document.conflict1.txt
+
+NEWER:
+• Keeps the version with most recent modification time
+• Older version is overwritten
+• Based on file timestamps
+
+Use when:
+• Time-based resolution makes sense
+• Clock sync is accurate
+
+OLDER:
+• Keeps the version with earliest modification time
+• Newer version is overwritten
+• Unusual but available
+
+Use when:
+• Want to preserve original version
+• Prevent overwrites of established content
+
+LARGER:
+• Keeps the version with larger file size
+• Smaller version is overwritten
+
+Use when:
+• Larger = more complete
+• File size indicates which is better
+
+SMALLER:
+• Keeps the version with smaller file size
+• Larger version is overwritten
+
+Use when:
+• Want compressed versions
+• Larger files are temporary/cache
+
+PATH1:
+• Always prefer source (path1) version
+• Destination version is overwritten
+
+Use when:
+• Source is authoritative
+• Want one-way priority
+
+PATH2:
+• Always prefer destination (path2) version
+• Source version is overwritten
+
+Use when:
+• Destination is authoritative
+• Backup location is primary
+
+RECOMMENDATION:
+Start with "newer" for most use cases.
+Change to "none" if you want to manually review conflicts.
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+
+CHAPTER 11: RUNNING SYNCS
+═══════════════════════════════════════════════════════════════════════════
+
+11.1 MANUAL SYNC EXECUTION
+─────────────────────────────────────────────────────────────────────────
+
+Once you've created sync profiles, you can run them anytime.
+
+RUNNING A SYNC:
+
+1. Switch to "Sync Manager" tab
+
+2. Find your profile in the list
+
+3. Click "🔄 Sync Now" button
+
+4. A console window opens showing:
+   - Rclone progress
+   - Files being synced
+   - Transfer statistics
+   - Any errors
+
+5. Wait for sync to complete
+   "Press any key to continue..." appears when done
+
+6. Press any key to close console
+
+CONSOLE WINDOW:
+The console shows real-time progress:
+```
+Transferred:      1.234 GiB / 5.678 GiB, 22%, 10.5 MiB/s, ETA 5m30s
+Transferred:      123 / 456, 27%
+Elapsed time:    1m15s
+Transferring:
+ * file1.jpg
+ * file2.mp4
+```
+
+WHAT HAPPENS:
+DriveMapper Pro builds an rclone command based on your profile:
+
+For bidirectional:
+```
+rclone bisync source destination --check-access --conflict-resolve newer 
+--progress --verbose --log-file sync_ProfileName.log
+```
+
+For one-way:
+```
+rclone sync source destination --delete-during --progress --verbose 
+--log-file sync_ProfileName.log
+```
+
+
+11.2 MONITORING PROGRESS
+─────────────────────────────────────────────────────────────────────────
+
+CONSOLE OUTPUT:
+Real-time progress shown in console window:
+• Transfer rate (MB/s)
+• Percentage complete
+• Time remaining (ETA)
+• Current files being transferred
+• Elapsed time
+
+KEY METRICS TO WATCH:
+
+Transferred:
+    1.234 GiB / 5.678 GiB
+Shows data transferred vs total size
+
+Transfer Rate:
+    10.5 MiB/s
+Current speed - varies based on file sizes and network
+
+Files:
+    123 / 456, 27%
+Number of files transferred vs total count
+
+ETA:
+    ETA 5m30s
+Estimated time to completion
+
+ERROR MESSAGES:
+Watch for red text indicating errors:
+- Access denied
+- File in use
+- Network timeout
+- Insufficient space
+
+INTERRUPTING A SYNC:
+To stop a running sync:
+1. Close the console window
+OR
+2. Press Ctrl+C in console
+OR
+3. Click X on console window
+
+CAUTION:
+Interrupting bisync may leave it in inconsistent state.
+May need to run with --resync next time.
+
+
+11.3 SYNC LOGS
+─────────────────────────────────────────────────────────────────────────
+
+Every sync creates a detailed log file.
+
+LOG FILE LOCATION:
+Same folder as DriveMapper Pro:
+    sync_ProfileName.log
+
+Example:
+If your profile is named "Documents Backup", the log is:
+    sync_Documents_Backup.log
+
+VIEWING LOGS:
+Method 1: From DriveMapper Pro
+- Find your sync profile
+- Click "📜 Log" button
+- Log opens in Notepad
+
+Method 2: Manual
+- Navigate to DriveMapper Pro folder
+- Open sync_*.log files in any text editor
+
+LOG CONTENTS:
+```
+2025/02/07 14:23:45 INFO  : bisync comparing Path1 vs Path2
+2025/02/07 14:23:46 INFO  : Path1 checking for diffs
+2025/02/07 14:23:47 INFO  : Path2 checking for diffs
+2025/02/07 14:23:48 INFO  : Copying Path2 to Path1
+2025/02/07 14:23:49 INFO  : - Path2    Cp file1.jpg
+2025/02/07 14:23:50 INFO  : Bisync successful
+```
+
+UNDERSTANDING LOGS:
+
+INFO: Normal operation messages
+ERROR: Problems that occurred
+WARNING: Potential issues
+DEBUG: Detailed technical info (if enabled)
+
+Common log entries:
+- "Bisync successful" = Good!
+- "Access denied" = Permission problem
+- "File not found" = Source file disappeared
+- "Insufficient space" = Destination full
+- "Conflict" = Same file modified on both sides
+
+LOG SIZE:
+Logs can grow large over time. Safe to delete old logs.
+
+
+11.4 STOPPING SYNCS
+─────────────────────────────────────────────────────────────────────────
+
+GRACEFUL STOP:
+When sync finishes, console shows:
+"Press any key to continue..."
+Press any key to close.
+
+FORCED STOP:
+To stop a running sync:
+1. Click "X" on console window
+OR
+2. Press Ctrl+C in console
+
+CONSEQUENCES OF STOPPING:
+
+One-way sync:
+• Stops mid-transfer
+• Some files copied, others not
+• No corruption risk
+• Just re-run to complete
+
+Bidirectional sync:
+• May leave tracking database inconsistent
+• Next run may need --resync
+• Check RCLONE_TEST files present
+• Re-run sync to finish
+
+EMERGENCY STOP:
+If sync seems stuck:
+1. Close console window
+2. Open Task Manager
+3. End rclone.exe process
+4. Check sync_*.log for errors
+5. May need --resync for bisync
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+
+CHAPTER 12: SYNC SCENARIOS
+═══════════════════════════════════════════════════════════════════════════
+
+12.1 LOCAL TO CLOUD BACKUP
+─────────────────────────────────────────────────────────────────────────
+
+SCENARIO:
+Back up your Documents folder to Google Drive every week.
+
+SETUP:
+Profile Name: Documents Backup
+Source: C:\Users\YourName\Documents
+Destination: gdrive:Backup/Documents
+☐ Bidirectional (one-way backup)
+☑ Delete files on destination
+☑ Check access
+☑ Force resync (first time only)
+
+WHY THESE SETTINGS:
+• One-way: Backup should only copy to cloud
+• Delete enabled: Keep backup identical to source
+• Check access: Verify cloud is accessible
+
+WORKFLOW:
+1. Create profile with above settings
+2. Click "🔄 Sync Now"
+3. First run takes longer (uploads everything)
+4. Wait for "Bisync successful"
+5. Run weekly or after important changes
+
+VARIATIONS:
+• Multiple folders: Create separate profiles for each
+• Selective backup: Only sync specific subdirectories
+• No deletions: Disable delete to keep old versions in cloud
+
+
+12.2 BIDIRECTIONAL CLOUD SYNC
+─────────────────────────────────────────────────────────────────────────
+
+SCENARIO:
+Work on files from both laptop and desktop, keeping them synchronized
+through cloud storage.
+
+SETUP:
+Profile Name: Work Files Sync
+Source: C:\Work
+Destination: gdrive:WorkSync
+☑ Bidirectional (bisync)
+☐ Delete files on destination (not applicable for bisync)
+☑ Check access
+☑ Force resync (first time only)
+Conflict Resolution: newer
+
+WHY THESE SETTINGS:
+• Bidirectional: Changes on either side sync
+• Newer conflict: Most recent edit wins
+• Check access: Prevent one-way sync if cloud unreachable
+
+WORKFLOW ON LAPTOP:
+1. Make changes to C:\Work files
+2. Run sync before shutting down
+3. Changes upload to Google Drive
+
+WORKFLOW ON DESKTOP:
+1. Run sync on startup
+2. Changes from laptop download
+3. Make desktop changes
+4. Run sync before shutting down
+
+CONFLICT HANDLING:
+If you edit the same file on both:
+• "newer" resolution keeps latest version
+• Older version is discarded
+• Check sync log for conflicts
+
+BEST PRACTICES:
+• Sync before starting work
+• Sync before finishing work
+• Don't work on both simultaneously
+• Check for conflicts in log
+
+
+12.3 SERVER TO SERVER SYNC
+─────────────────────────────────────────────────────────────────────────
+
+SCENARIO:
+Mirror files from production server to backup server.
+
+SETUP:
+Profile Name: Server Mirror
+Source: \\prod-server\data
+Destination: \\backup-server\mirror
+☐ Bidirectional (one-way mirror)
+☑ Delete files on destination
+☑ Check access
+☑ Force resync (first time only)
+
+NETWORK REQUIREMENTS:
+• Both servers accessible from DriveMapper Pro machine
+• Sufficient permissions on both
+• Adequate network bandwidth
+
+WORKFLOW:
+1. Create profile
+2. Run first sync (may take hours for large datasets)
+3. Schedule regular runs (see Chapter 15 for automation)
+4. Monitor logs for errors
+
+USE CASES:
+• Nightly backups
+• DR (disaster recovery) preparation
+• Data replication
+• Offsite backup
+
+
+12.4 MULTI-LOCATION SYNC
+─────────────────────────────────────────────────────────────────────────
+
+SCENARIO:
+Sync photos between laptop, desktop, and NAS.
+
+ARCHITECTURE:
+NAS acts as central hub:
+    Laptop ⟷ NAS ⟷ Desktop
+
+TWO PROFILES NEEDED:
+
+Profile 1: Laptop to NAS
+Name: Laptop Photos
+Source: C:\Photos
+Destination: \\nas\photos
+Bidirectional: Yes
+Conflict Resolution: newer
+
+Profile 2: Desktop to NAS
+Name: Desktop Photos
+Source: D:\Photos
+Destination: \\nas\photos
+Bidirectional: Yes
+Conflict Resolution: newer
+
+WORKFLOW:
+On Laptop:
+1. Import photos to C:\Photos
+2. Run "Laptop Photos" sync
+3. Photos upload to NAS
+
+On Desktop:
+1. Run "Desktop Photos" sync
+2. Photos from NAS download
+3. Now have photos from laptop
+
+CONFLICT AVOIDANCE:
+• Don't edit same photo on multiple devices
+• Use unique filenames (e.g., camera includes timestamp)
+• Sync frequently to minimize divergence
+
+ALTERNATIVE: Cloud Hub
+Instead of NAS, use cloud storage:
+    Laptop ⟷ Google Drive ⟷ Desktop
+
+Same concept, different destination.
+
+
+12.5 DEVELOPMENT WORKFLOWS
+─────────────────────────────────────────────────────────────────────────
+
+SCENARIO:
+Sync code between local development and remote server.
+
+SETUP:
+Profile Name: Code Sync
+Source: C:\Projects\myapp
+Destination: user@server.com:/var/www/myapp (via SFTP)
+☑ Bidirectional
+☑ Check access
+Conflict Resolution: newer
+
+WORKFLOW:
+1. Develop locally in C:\Projects\myapp
+2. Test locally
+3. Run sync to upload to server
+4. Server now has latest code
+5. Test on server
+6. If you edit on server, sync downloads changes
+
+ALTERNATIVES:
+
+Git Integration:
+DriveMapper Pro doesn't replace version control!
+For code, use Git for version control and DriveMapper Pro for
+quick deployment/testing.
+
+One-Way Deploy:
+For production, use one-way sync:
+    Local Code → Production Server (no reverse sync)
+
+Multi-Environment:
+Create separate profiles:
+- Dev Sync: Local ⟷ Dev Server
+- Staging Deploy: Local → Staging (one-way)
+- Production Deploy: Local → Production (one-way)
+
+
+═══════════════════════════════════════════════════════════════════════════
+PART IV: TROUBLESHOOTING & MAINTENANCE
+═══════════════════════════════════════════════════════════════════════════
+
+
+CHAPTER 13: COMMON ISSUES
+═══════════════════════════════════════════════════════════════════════════
+
+13.1 ERROR 1219 RESOLUTION
+─────────────────────────────────────────────────────────────────────────
+
+FULL ERROR:
+"Multiple connections to a server or shared resource by the same user,
+using more than one user name, are not allowed."
+
+ROOT CAUSE:
+Windows only allows one set of credentials per server.
+
+SYMPTOMS:
+• Can map first drive from server successfully
+• Second drive from same server fails with error 1219
+• Error occurs even with same username
+
+SOLUTION 1: USE PREPARE BUTTON
+1. Click "🔓 Clear" to clear existing connections
+2. Ensure all drives from same server have SAME credentials
+3. Click "🔧 Prepare" to establish server connections
+4. Click "▶▶ Map All"
+
+SOLUTION 2: DISCONNECT AND REMAP
+1. Click "⏹ Disconnect All"
+2. Verify all \\server shares use identical credentials in configs
+3. Click "▶▶ Map All"
+
+SOLUTION 3: MANUAL FIX
+1. Open Command Prompt as Administrator
+2. Run: net use * /delete /yes
+3. Run: net use \\server\IPC$ /user:username password
+4. Now map drives in DriveMapper Pro
+
+PREVENTION:
+• Use "Clone" feature to ensure same credentials
+• Check credentials before adding multiple shares
+• Use "Prepare" before "Map All"
+
+VERIFICATION:
+Check that all shares from same server have identical:
+- Username field
+- Password field
+Empty vs filled counts as different!
+
+
+13.2 DRIVE NOT SHOWING IN STATUS
+─────────────────────────────────────────────────────────────────────────
+
+SYMPTOM:
+Drive is mapped (visible in File Explorer) but doesn't appear in
+"Live Drive Status" panel.
+
+DIAGNOSIS:
+
+Step 1: Click "🔄 Refresh"
+Wait 2-3 seconds and see if drive appears.
+
+Step 2: Click "🔍 Test"
+Compare three detection methods:
+- net use command
+- PowerShell Get-PSDrive
+- Python win32api
+
+If drive shows in "net use" but not win32api, the dual-method detection
+should still catch it.
+
+Step 3: Check Logs
+Open drive_events.log and look for:
+- "DEBUG: net use detected X:"
+- "DEBUG: win32api detected X:"
+
+SOLUTIONS:
+
+If drive is in "net use" but not status:
+• Bug in status refresh - report this
+• Drive is mapped correctly, just display issue
+• Use File Explorer to access drive
+
+If drive is NOT in "net use":
+• Drive didn't actually map
+• Check for error messages in log
+• Try mapping again
+
+If neither detection method sees it:
+• Drive may be local, not network
+• Drive type may not be 4 (network)
+• Use "net use" command manually to verify
+
+
+13.3 AUTHENTICATION FAILURES
+─────────────────────────────────────────────────────────────────────────
+
+ERROR CODES:
+
+Error 1326: "Logon failure: unknown user name or bad password"
+Cause: Incorrect username or password
+Solution:
+- Double-check credentials
+- Verify caps lock is off
+- Try logging in via Windows Explorer first
+- Check if account is locked
+
+Error 5: "Access is denied"
+Cause: Insufficient permissions
+Solution:
+- Verify user has access to the share
+- Check share permissions on server
+- Check NTFS permissions on server
+- Try with administrator account
+
+Error 53: "The network path was not found"
+Cause: Server or share doesn't exist
+Solution:
+- Verify server is online: ping server_ip
+- Check share name spelling
+- Verify share exists on server
+- Try \\server without share name
+
+Error 64: "The specified network name is no longer available"
+Cause: Network connection lost
+Solution:
+- Check network cable/WiFi
+- Verify server is still online
+- Check for network interruptions
+- May need to disconnect and reconnect
+
+DOMAIN AUTHENTICATION:
+For domain users:
+- Username format: DOMAIN\username
+- Don't use email address
+- Must be on domain network or VPN
+
+TROUBLESHOOTING STEPS:
+1. Test credentials in Windows Explorer
+   - Press Win+R
+   - Type: \\server\share
+   - Enter credentials when prompted
+   
+2. If Explorer works but DriveMapper fails:
+   - Copy exact path from Explorer
+   - Ensure credentials match exactly
+   
+3. Check server-side logs
+   - View security logs on server
+   - Look for failed login attempts
+   - Verify account isn't locked
+
+
+13.4 SYNC CONFLICTS
+─────────────────────────────────────────────────────────────────────────
+
+WHAT IS A CONFLICT?
+When the same file is modified on both sides between syncs.
+
+SYMPTOMS:
+• Files with .conflict suffix appear
+• Sync log shows "conflict" messages
+• Multiple versions of same file exist
+
+FINDING CONFLICTS:
+1. Open sync log file
+2. Search for "conflict"
+3. Look for lines like:
+   "NOTICE: file.txt: bisync: conflict: file modified on both sides"
+
+RESOLUTION BY STRATEGY:
+
+If conflict_resolve = "none":
+• Both versions are kept
+• Conflicted file renamed with suffix
+Example:
+    document.txt (original from one side)
+    document.conflict1.txt (version from other side)
+
+Manual resolution:
+1. Open both files
+2. Determine which to keep
+3. Delete unwanted version
+4. Rename if needed
+5. Run sync again
+
+If conflict_resolve = "newer/older/larger/smaller/path1/path2":
+• Rclone automatically resolves
+• One version overwrites the other
+• Lost version cannot be recovered
+
+PREVENTION:
+• Don't edit same file on multiple devices simultaneously
+• Sync frequently to minimize divergence
+• Use unique filenames when possible
+• Add timestamps to filenames
+• Consider using version control (Git) for critical files
+
+
+13.5 PERFORMANCE ISSUES
+─────────────────────────────────────────────────────────────────────────
+
+SLOW DRIVE ACCESS:
+
+For Cloud Drives:
+Cause: Internet latency, poor caching
+Solutions:
+- Use wired connection, not WiFi
+- Increase rclone cache size
+- Pre-download frequently used files
+- Consider local copy with periodic sync
+
+For SMB Shares:
+Cause: Network congestion, slow server
+Solutions:
+- Check network utilization
+- Verify server performance
+- Use gigabit ethernet
+- Reduce simultaneous connections
+
+For SFTP/WebDAV:
+Cause: Protocol overhead, encryption
+Solutions:
+- Use SMB if possible (faster)
+- Reduce transfer sizes
+- Enable compression (rclone flags)
+
+
+SLOW SYNC:
+
+Small Files:
+Cause: Overhead of many operations
+Solutions:
+- Archive small files
+- Use --transfers flag to increase parallel transfers
+- Consider compression
+
+Large Files:
+Cause: Transfer time
+Solutions:
+- Use --max-size to exclude huge files
+- Sync during off-hours
+- Increase bandwidth
+- Enable multipart uploads (for cloud)
+
+First Sync:
+Cause: Everything must be transferred
+Solutions:
+- Be patient!
+- Run overnight for large datasets
+- Use --dry-run first to estimate time
+- Consider physical media for initial transfer (if very large)
+
+
+GENERAL PERFORMANCE TIPS:
+• Close unnecessary applications
+• Disable antivirus scanning of network drives (temporarily)
+• Use dedicated network connection for sync
+• Schedule syncs during off-peak hours
+• Monitor network bandwidth usage
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+
+CHAPTER 14: DIAGNOSTIC TOOLS
+═══════════════════════════════════════════════════════════════════════════
+
+14.1 USING THE TEST BUTTON
+─────────────────────────────────────────────────────────────────────────
+
+LOCATION:
+"Live Drive Status" panel → "🔍 Test" button
+
+PURPOSE:
+Compares three different methods of detecting network drives to diagnose
+display issues.
+
+WHAT IT SHOWS:
+
+Section 1: NET USE COMMAND
+Output of Windows "net use" command:
+```
+Status       Local     Remote                    Network
+------------------------------------------------------------------------------
+OK           Z:        \\192.168.1.50\Media        Microsoft Windows Network
+```
+
+This is Windows' native view of mapped drives.
+
+Section 2: POWERSHELL GET-PSDRIVE
+Output of PowerShell command:
+```
+Name   Used (GB)  Free (GB)  Provider  Root                     CurrentLocation
+----   ---------  ---------  --------  ----                     ---------------
+Z           12.34      45.67  FileSystem  \\192.168.1.50\Media
+```
+
+This is PowerShell's view of drives.
+
+Section 3: PYTHON WIN32API
+DriveMapper Pro's programmatic detection:
+```
+Z:  Type=4 (Network)
+    Path: \\192.168.1.50\Media
+```
+
+Drive type codes:
+- 4 = Network drive
+- 3 = Fixed drive (local hard disk)
+- 2 = Removable drive
+- 5 = CD-ROM
+- 6 = RAM disk
+
+INTERPRETING RESULTS:
+
+ALL THREE METHODS SHOW DRIVE:
+✓ Everything working correctly
+- If drive not in status, click Refresh
+
+NET USE SHOWS, OTHERS DON'T:
+Possible causes:
+- Win32API issue (rare)
+- PowerShell execution policy
+- Drive type misidentified
+
+DriveMapper Pro should still detect it via "net use" fallback method.
+
+NONE SHOW DRIVE:
+Drive is NOT actually mapped:
+- Check File Explorer
+- Review error logs
+- Try mapping again
+
+ONLY WIN32API SHOWS:
+Unusual - may be:
+- Special drive type
+- Virtual drive
+- Not a real network mapping
+
+
+14.2 READING LOGS
+─────────────────────────────────────────────────────────────────────────
+
+LOG FILE: drive_events.log
+
+LOCATION:
+Same folder as DriveMapper Pro application
+
+OPENING LOGS:
+Method 1: Click "📜 Logs" button in header
+Method 2: Open drive_events.log in text editor
+
+LOG FORMAT:
+[YYYY-MM-DD HH:MM:SS] MESSAGE
+
+Example entries:
+```
+[2025-02-07 14:32:15] Loaded 4 drive configurations
+[2025-02-07 14:32:20] Established server connection to \\192.168.1.50
+[2025-02-07 14:32:21] SUCCESS: Mapped Z: → \\192.168.1.50\Media (SMB)
+[2025-02-07 14:32:22] DEBUG: win32api detected Z: -> \\192.168.1.50\Media
+```
+
+LOG LEVELS:
+
+INFO: Normal operations
+- Configuration loaded
+- Drives mapped
+- Status refreshed
+
+SUCCESS: Positive confirmations
+- Drive mapped successfully
+- Sync completed
+- Validation passed
+
+ERROR: Problems
+- Drive mapping failed
+- Authentication errors
+- Network issues
+
+WARNING: Potential issues
+- Different credentials
+- Connection concerns
+
+DEBUG: Technical details
+- Drive detection methods
+- API calls
+- Internal state
+
+COMMON LOG PATTERNS:
+
+Successful Mapping:
+```
+[timestamp] Established server connection to \\server
+[timestamp] SUCCESS: Mapped Z: → \\server\share (SMB)
+```
+
+Failed Mapping:
+```
+[timestamp] ERROR: Failed to map Z: → \\server\share (SMB): (1326, ...)
+```
+
+Error 1219:
+```
+[timestamp] Server \\server already connected with different credentials
+[timestamp] ERROR: Failed to map Y: → \\server\other: (1219, ...)
+```
+
+TROUBLESHOOTING WITH LOGS:
+
+1. Find the error timestamp
+2. Look at events leading up to error
+3. Check for error codes in parentheses
+4. Search this manual for error code
+5. Follow resolution steps
+
+
+14.3 DEBUG MODE
+─────────────────────────────────────────────────────────────────────────
+
+ENABLING DEBUG MODE:
+DriveMapper Pro includes debug logging by default for drive detection.
+
+To add more debug output:
+1. Edit the .py file
+2. Add more self.log_event() calls
+3. Save and restart application
+
+DEBUG INFORMATION LOGGED:
+• Raw drive strings from Windows
+• Drive type for each letter
+• Success/failure of each detection method
+• Server connection attempts
+• Network path resolution
+
+VIEWING DEBUG OUTPUT:
+All debug messages go to drive_events.log with "DEBUG:" prefix.
+
+Example:
+```
+[2025-02-07 14:32:22] DEBUG: GetLogicalDriveStrings returned 5 drives
+[2025-02-07 14:32:22] DEBUG: Z: type=4
+[2025-02-07 14:32:22] DEBUG: win32api detected Z: -> \\192.168.1.50\Media
+[2025-02-07 14:32:22] DEBUG: net use detected Z: -> \\192.168.1.50\Media
+```
+
+DISABLING DEBUG MODE:
+To reduce log file size:
+1. Edit .py file
+2. Remove or comment out lines starting with:
+   self.log_event(f"DEBUG: ...")
+3. Save and restart
+
+
+14.4 NETWORK DIAGNOSTICS
+─────────────────────────────────────────────────────────────────────────
+
+TESTING NETWORK CONNECTIVITY:
+
+Ping Test:
+```cmd
+ping 192.168.1.50
+```
+Verifies server is reachable.
+
+Good response:
+```
+Reply from 192.168.1.50: bytes=32 time=2ms TTL=64
+```
+
+Bad response:
+```
+Request timed out.
+```
+
+SMB Port Test:
+```cmd
+telnet 192.168.1.50 445
+```
+Tests if SMB port is accessible.
+
+If telnet connects = SMB port open
+If connection fails = Port blocked or server down
+
+Alternative (if telnet not installed):
+```powershell
+Test-NetConnection -ComputerName 192.168.1.50 -Port 445
+```
+
+List Shares:
+```cmd
+net view \\192.168.1.50
+```
+Lists all shares on the server.
+
+Example output:
+```
+Share name   Type  Used as  Comment
+------------------------------------------
+Media        Disk           Media Files
+Documents    Disk           User Documents
+```
+
+Test Authentication:
+```cmd
+net use \\192.168.1.50\IPC$ /user:username password
+```
+Tests if credentials work.
+
+Success = "The command completed successfully"
+Failure = Error code (1326, 5, etc.)
+
+NETWORK TRACING:
+
+For advanced diagnostics, use Windows Network Monitor or Wireshark:
+1. Start packet capture
+2. Attempt to map drive
+3. Look for SMB/CIFS traffic
+4. Check for authentication packets
+5. Identify where connection fails
+
+FIREWALL CHECKS:
+
+Windows Firewall:
+- Allow "File and Printer Sharing"
+- Port 445 must be open for SMB
+
+Server Firewall:
+- Verify SMB ports open
+- Check allow rules for your IP
+
+Network Firewall/Router:
+- Port 445 allowed between networks
+- No SMB blocking rules
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+
+CHAPTER 15: MAINTENANCE & BEST PRACTICES
+═══════════════════════════════════════════════════════════════════════════
+
+15.1 CONFIGURATION BACKUPS
+─────────────────────────────────────────────────────────────────────────
+
+WHAT TO BACKUP:
+
+Essential Files:
+• network_vault.json - All drive configurations
+• sync_profiles.json - All sync profiles
+• drive_events.log - Historical log (optional)
+
+BACKUP METHODS:
+
+Manual Backup:
+1. Navigate to DriveMapper Pro folder
+2. Copy the .json files
+3. Store in safe location:
+   - Cloud storage
+   - External drive
+   - Network share
+
+Automated Backup:
+Create a batch script:
+```batch
+@echo off
+set SOURCE=C:\DriveMapperPro
+set DEST=D:\Backups\DriveMapperPro
+set DATE=%DATE:~-4,4%%DATE:~-10,2%%DATE:~-7,2%
+
+mkdir "%DEST%\%DATE%"
+copy "%SOURCE%\*.json" "%DEST%\%DATE%\"
+echo Backup completed: %DEST%\%DATE%
+```
+
+Run weekly via Task Scheduler.
+
+RESTORATION:
+
+To restore configuration:
+1. Close DriveMapper Pro
+2. Replace network_vault.json and/or sync_profiles.json
+3. Restart DriveMapper Pro
+4. Configurations restored!
+
+PASSWORD SECURITY NOTE:
+The .json files contain passwords in plain text.
+Protect backup files appropriately:
+- Encrypt backup storage
+- Restrict file permissions
+- Use secure backup locations
+
+
+15.2 SECURITY CONSIDERATIONS
+─────────────────────────────────────────────────────────────────────────
+
+PASSWORD STORAGE:
+
+CURRENT IMPLEMENTATION:
+Passwords are stored in plain text in network_vault.json.
+
+IMPLICATIONS:
+• Anyone with file access can read passwords
+• Not suitable for highly sensitive environments
+• Acceptable for personal use with proper file permissions
+
+MITIGATIONS:
+1. File Permissions:
+   - Set network_vault.json to read-only for your user
+   - Remove permissions for other users
+
+2. Disk Encryption:
+   - Use BitLocker (Windows)
+   - Encrypt entire drive
+   - Protects files when computer is off
+
+3. Secure Storage:
+   - Keep DriveMapper Pro folder in encrypted location
+   - Don't store on shared network drives
+   - Avoid cloud sync of config files
+
+4. Use Network Authentication:
+   - Rely on Windows credential manager when possible
+   - Leave password fields empty (for trusted networks)
+
+NETWORK SECURITY:
+
+SMB Signing:
+- Modern Windows uses SMB signing by default
+- Prevents man-in-the-middle attacks
+
+HTTPS for WebDAV:
+- DriveMapper Pro uses HTTPS for WebDAV
+- Credentials encrypted in transit
+
+Cloud OAuth:
+- Rclone uses OAuth for cloud providers
+- No passwords stored in DriveMapper Pro
+- Tokens stored in rclone config
+
+VPN USAGE:
+For accessing remote servers:
+- Use VPN before mapping drives
+- Never expose SMB to internet directly
+- Use SFTP for internet-facing servers
+
+AUDIT LOGGING:
+- Review drive_events.log regularly
+- Check for unauthorized access attempts
+- Monitor mapped drives from status panel
+
+
+15.3 PERFORMANCE TUNING
+─────────────────────────────────────────────────────────────────────────
+
+SMB PERFORMANCE:
+
+Network Settings:
+- Use wired gigabit ethernet
+- Disable SMB1 (security risk, slow)
+- Enable SMB3 (faster, more secure)
+
+Windows Settings:
+- Disable "Remote Differential Compression"
+- Enable "Large MTU" if network supports
+- Adjust TCP window size
+
+Server Settings:
+- Enable SMB multichannel
+- Use SSD storage on server
+- Adequate server RAM for caching
+
+RCLONE PERFORMANCE:
+
+Cache Settings:
+Default: --vfs-cache-mode writes
+Better: --vfs-cache-mode full
+
+To change (manual rclone mount):
+```cmd
+rclone mount remote: X: --vfs-cache-mode full --vfs-cache-max-size 10G
+```
+
+Transfer Settings:
+- Increase --transfers (default 4, try 8-16)
+- Use --fast-list for large directories
+- Enable --drive-chunk-size for Google Drive
+
+Bandwidth:
+- Limit with --bwlimit if needed
+- Example: --bwlimit 10M (10 MB/s max)
+
+SYNC PERFORMANCE:
+
+Reduce Sync Time:
+• Exclude unnecessary files:
+  --exclude "*.tmp" --exclude "Thumbs.db"
+  
+• Use filters file:
+  --filter-from filters.txt
+
+• Parallel transfers:
+  --transfers 8
+
+• Skip unchanged files (default behavior)
+
+Schedule Long Syncs:
+- Run overnight for large datasets
+- Use --max-transfer to limit per-run
+- Split into multiple smaller sync profiles
+
+
+15.4 SCHEDULED TASKS
+─────────────────────────────────────────────────────────────────────────
+
+AUTOMATING DRIVEMAPPER PRO:
+
+Startup Mapping:
+Create shortcut in Startup folder:
+1. Press Win+R
+2. Type: shell:startup
+3. Create shortcut to DriveMapper Pro
+4. Optionally create batch file that:
+   - Launches DriveMapper Pro
+   - Waits 10 seconds
+   - Runs map all command (if CLI exists)
+
+WINDOWS TASK SCHEDULER:
+
+Scheduled Sync Example:
+1. Open Task Scheduler
+2. Create Basic Task
+3. Name: "DriveMapper Nightly Sync"
+4. Trigger: Daily at 2:00 AM
+5. Action: Start a program
+6. Program: rclone
+7. Arguments: bisync C:\Data remote:Backup --check-access
+
+For DriveMapper Pro sync profiles, you need to extract the rclone
+command and run it via Task Scheduler.
+
+TASK SCHEDULER TIPS:
+• Run whether user is logged on or not
+• Run with highest privileges (if needed)
+• Configure for your Windows version
+• Test manually before scheduling
+
+BATCH SCRIPT FOR MULTIPLE SYNCS:
+```batch
+@echo off
+echo Starting scheduled syncs...
+
+echo Syncing Documents...
+rclone bisync C:\Documents gdrive:Backup/Documents --check-access --conflict-resolve newer
+
+echo Syncing Photos...
+rclone sync C:\Photos onedrive:Photos --progress
+
+echo All syncs complete!
+```
+
+Save as sync_all.bat and schedule this file.
+
+MONITORING SCHEDULED TASKS:
+• Check Task Scheduler history
+• Review sync log files
+• Set up email notifications (advanced)
+• Monitor disk space on destinations
+
+
+═══════════════════════════════════════════════════════════════════════════
+PART V: ADVANCED TOPICS
+═══════════════════════════════════════════════════════════════════════════
+
+
+CHAPTER 16: COMMAND LINE INTEGRATION
+═══════════════════════════════════════════════════════════════════════════
+
+16.1 RCLONE COMMANDS
+─────────────────────────────────────────────────────────────────────────
+
+DriveMapper Pro uses rclone internally. You can use rclone commands
+directly for advanced operations.
+
+BASIC RCLONE COMMANDS:
+
+List Remotes:
+```cmd
+rclone listremotes
+```
+Shows all configured remotes.
+
+List Directory:
+```cmd
+rclone lsd remote:path
+```
+Lists directories in remote.
+
+List Files:
+```cmd
+rclone ls remote:path
+```
+Lists all files with sizes.
+
+Copy:
+```cmd
+rclone copy source: dest: --progress
+```
+Copies new/changed files from source to dest.
+
+Sync:
+```cmd
+rclone sync source: dest: --progress
+```
+Makes dest identical to source (deletes extra files).
+
+Bisync:
+```cmd
+rclone bisync path1 path2 --check-access --resync
+```
+Bidirectional sync between path1 and path2.
+
+ADVANCED FLAGS:
+
+Dry Run:
+```cmd
+rclone sync source dest --dry-run
+```
+Shows what would happen without actually doing it.
+
+Verbose:
+```cmd
+rclone copy source dest -vv
+```
+Shows detailed output (-v or -vv or -vvv).
+
+Exclude Patterns:
+```cmd
+rclone sync source dest --exclude "*.tmp" --exclude "*.bak"
+```
+Excludes files matching patterns.
+
+Include Only:
+```cmd
+rclone sync source dest --include "*.jpg" --include "*.png"
+```
+Only includes matching files.
+
+Bandwidth Limit:
+```cmd
+rclone sync source dest --bwlimit 10M
+```
+Limits bandwidth to 10 MB/s.
+
+USEFUL RCLONE COMMANDS FOR DRIVEMAPPER PRO:
+
+Check Sync Status:
+```cmd
+rclone check source: dest:
+```
+Compares source and dest, reports differences.
+
+Delete Empty Dirs:
+```cmd
+rclone rmdirs remote:path
+```
+Removes empty directories.
+
+Deduplicate:
+```cmd
+rclone dedupe remote:path
+```
+Finds and removes duplicate files.
+
+Size Calculation:
+```cmd
+rclone size remote:path
+```
+Calculates total size of files.
+
+
+16.2 SCRIPTING DRIVEMAPPER PRO
+─────────────────────────────────────────────────────────────────────────
+
+BATCH SCRIPTING:
+
+Map All Drives on Startup:
+```batch
+@echo off
+echo Starting DriveMapper Pro...
+start "" "C:\Path\To\drivemapper_pro_v6.0_COMPLETE.py"
+
+echo Waiting for app to initialize...
+timeout /t 5 /nobreak
+
+echo Drives should now be mapped!
+```
+
+Run Specific Sync:
+```batch
+@echo off
+echo Running Documents Backup...
+rclone sync C:\Documents gdrive:Backup/Documents --progress --log-file sync.log
+
+if %ERRORLEVEL% EQU 0 (
+    echo Sync completed successfully!
+) else (
+    echo Sync failed! Check sync.log
+)
+```
+
+POWERSHELL SCRIPTING:
+
+More Advanced Sync with Notification:
+```powershell
+# Run sync
+$result = rclone sync C:\Data remote:Backup --progress
+
+# Check result
+if ($LASTEXITCODE -eq 0) {
+    Write-Host "Sync completed successfully!" -ForegroundColor Green
+    
+    # Could send email notification
+    # Send-MailMessage -To "you@example.com" ...
+} else {
+    Write-Host "Sync failed!" -ForegroundColor Red
+}
+```
+
+PYTHON SCRIPTING:
+
+Direct Integration:
+You can import DriveMapper Pro modules in your own Python scripts:
+```python
+import json
+
+# Load configurations
+with open('network_vault.json', 'r') as f:
+    drives = json.load(f)
+
+# Process drives
+for drive in drives:
+    print(f"Drive {drive['letter']}: -> {drive['path']}")
+```
+
+
+16.3 AUTOMATION
+─────────────────────────────────────────────────────────────────────────
+
+WINDOWS TASK SCHEDULER:
+
+Daily Sync Task:
+1. Open Task Scheduler
+2. Create Basic Task
+3. Name: "Daily Backup Sync"
+4. Trigger: Daily at 11:00 PM
+5. Action: Start a program
+   Program: rclone
+   Arguments: sync C:\Important gdrive:Backup --log-file daily_sync.log
+
+Startup Drive Mapping:
+1. Create Basic Task
+2. Name: "Map Network Drives"
+3. Trigger: At log on
+4. Action: Start a program
+   Program: python
+   Arguments: "C:\Path\To\drivemapper_pro_v6.0_COMPLETE.py"
+
+ADVANCED AUTOMATION:
+
+Email Notifications:
+Use PowerShell to send email after sync:
+```powershell
+$result = rclone sync source dest
+
+if ($LASTEXITCODE -eq 0) {
+    Send-MailMessage -From "auto@domain.com" -To "you@domain.com" `
+        -Subject "Sync Successful" -Body "Daily sync completed." `
+        -SmtpServer "smtp.gmail.com" -Port 587 -UseSsl `
+        -Credential (Get-Credential)
+}
+```
+
+Conditional Syncs:
+Only sync if network available:
+```batch
+@echo off
+ping 192.168.1.50 -n 1 -w 1000 >nul
+if %ERRORLEVEL% EQU 0 (
+    echo Server online, starting sync...
+    rclone sync source dest
+) else (
+    echo Server offline, skipping sync
+)
+```
+
+Retry Logic:
+```batch
+@echo off
+set MAX_RETRIES=3
+set COUNT=0
+
+:RETRY
+rclone sync source dest
+if %ERRORLEVEL% EQU 0 goto SUCCESS
+
+set /A COUNT=%COUNT%+1
+if %COUNT% LSS %MAX_RETRIES% (
+    echo Retry %COUNT% of %MAX_RETRIES%...
+    timeout /t 10
+    goto RETRY
+)
+
+echo Sync failed after %MAX_RETRIES% attempts!
+exit /b 1
+
+:SUCCESS
+echo Sync successful!
+```
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+
+CHAPTER 17: NETWORK ARCHITECTURE
+═══════════════════════════════════════════════════════════════════════════
+
+17.1 HOW SERVER CONNECTIONS WORK
+─────────────────────────────────────────────────────────────────────────
+
+WINDOWS SMB ARCHITECTURE:
+
+When you map a drive, Windows:
+1. Establishes TCP connection to server (port 445)
+2. Negotiates SMB protocol version
+3. Authenticates user (if credentials provided)
+4. Opens session to specific share
+5. Assigns drive letter
+6. Maintains connection
+
+SERVER-LEVEL vs SHARE-LEVEL:
+
+Server-Level Connection:
+• Connection to \\server\IPC$
+• Authenticated session with username/password
+• ONE per server
+• Shared by all shares on that server
+
+Share-Level Connection:
+• Connection to specific share (\\server\sharename)
+• Uses existing server session
+• Multiple per server
+• Each gets own drive letter
+
+DRIVEMAPPER PRO APPROACH:
+
+Traditional Windows Mapping (without DriveMapper Pro):
+```
+Map Z: -> Authenticate to \\server\share1
+Map Y: -> Try to authenticate to \\server\share2
+ERROR 1219 if different credentials!
+```
+
+DriveMapper Pro Method:
+```
+Authenticate to \\server\IPC$ (server-level)
+Map Z: -> Use existing session for \\server\share1
+Map Y: -> Use existing session for \\server\share2
+SUCCESS!
+```
+
+IPC$ SHARE:
+• Administrative share
+• Used for inter-process communication
+• Allows server-level authentication
+• Does not appear as mapped drive
+• Only used for establishing session
+
+TECHNICAL DETAILS:
+
+WNetAddConnection2 API:
+DriveMapper Pro uses Windows API:
+```
+WNetAddConnection2(
+    NETRESOURCE,     // Specifies path and drive letter
+    password,        // Password (or NULL)
+    username,        // Username (or NULL)
+    flags           // Connection options
+)
+```
+
+First call (to IPC$): Establishes session
+Subsequent calls: Use NULL for credentials (uses existing session)
+
+
+17.2 WINDOWS NETWORK STACK
+─────────────────────────────────────────────────────────────────────────
+
+NETWORK LAYERS:
+
+Application Layer:
+• DriveMapper Pro
+• Windows Explorer
+• File operations
+
+SMB Protocol Layer:
+• SMB3, SMB2, SMB1
+• File sharing protocol
+• Authentication and encryption
+
+Transport Layer:
+• TCP/IP
+• Port 445 (SMB)
+• Port 139 (NetBIOS - legacy)
+
+Network Layer:
+• Ethernet/WiFi
+• Physical network connection
+
+PROTOCOLS USED:
+
+SMB/CIFS:
+• Modern: SMB3 (fastest, most secure)
+• Compatible: SMB2
+• Legacy: SMB1 (disabled by default, security risk)
+
+NetBIOS:
+• Legacy name resolution
+• Port 139
+• Not needed for modern networks
+
+DNS:
+• Name resolution
+• Converts servername to IP address
+• Required for using server names instead of IPs
+
+WINS:
+• Windows Internet Name Service
+• Legacy NetBIOS name resolution
+• Not commonly used anymore
+
+AUTHENTICATION METHODS:
+
+NTLM:
+• NT LAN Manager
+• Challenge-response authentication
+• Works without domain
+
+Kerberos:
+• Domain-based authentication
+• More secure than NTLM
+• Requires Active Directory
+
+Guest:
+• No authentication
+• Limited permissions
+• Insecure
+
+NETWORK DISCOVERY:
+
+How Windows finds servers:
+1. DNS lookup for server name
+2. LLMNR (Link-Local Multicast Name Resolution)
+3. NetBIOS broadcast (if enabled)
+4. Direct IP address connection
+
+Why IP addresses are more reliable:
+• Skip name resolution steps
+• Work even if DNS/LLMNR/NetBIOS fail
+• Faster connection establishment
+
+
+17.3 SECURITY & PERMISSIONS
+─────────────────────────────────────────────────────────────────────────
+
+SHARE PERMISSIONS:
+
+Set on SMB server, control WHO can access share:
+• Full Control
+• Change
+• Read
+
+Applied at share level, checked first.
+
+NTFS PERMISSIONS:
+
+Set on files/folders, control WHAT users can do:
+• Full Control
+• Modify
+• Read & Execute
+• Read
+• Write
+
+Applied at file level, checked second.
+
+EFFECTIVE PERMISSIONS:
+Combination of share and NTFS permissions.
+Most restrictive wins.
+
+Example:
+Share: Full Control
+NTFS: Read
+Result: Read only
+
+PERMISSION TROUBLESHOOTING:
+
+"Access Denied" errors:
+1. Check share permissions on server
+2. Check NTFS permissions on specific files/folders
+3. Verify user account has access
+4. Check group memberships
+5. Try with administrator account
+
+SECURITY BEST PRACTICES:
+
+Principle of Least Privilege:
+• Grant minimum necessary permissions
+• Don't use administrator accounts for regular access
+• Create separate accounts for different purposes
+
+Network Segmentation:
+• Use VLANs to separate sensitive data
+• Firewall rules between segments
+• Limit SMB to internal network only
+
+Encryption:
+• Enable SMB3 encryption
+• Use VPN for remote access
+• HTTPS for WebDAV
+
+Audit Logging:
+• Enable audit logging on SMB server
+• Monitor access logs
+• Alert on suspicious activity
+
+CREDENTIAL MANAGEMENT:
+
+Windows Credential Manager:
+• Stores saved credentials
+• Used for "remember my credentials"
+• Can interfere with DriveMapper Pro
+
+To view stored credentials:
+1. Control Panel
+2. Credential Manager
+3. Windows Credentials
+4. Look for server entries
+
+To remove:
+1. Find credential for server
+2. Click Remove
+3. Try mapping again with new credentials
+
+DOMAIN vs WORKGROUP:
+
+Domain Environment:
+• Centralized authentication (Active Directory)
+• Group Policy control
+• Kerberos authentication
+• More secure, easier management
+
+Workgroup:
+• Local authentication on each server
+• NTLM authentication
+• Each server has own user accounts
+• Common for home/small business
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+
+CHAPTER 18: CUSTOMIZATION
+═══════════════════════════════════════════════════════════════════════════
+
+18.1 CONFIGURATION FILES
+─────────────────────────────────────────────────────────────────────────
+
+NETWORK_VAULT.JSON STRUCTURE:
+
+```json
+[
+    {
+        "letter": "Z",
+        "path": "\\\\192.168.1.50\\Media",
+        "username": "admin",
+        "password": "password123",
+        "label": "Media Server",
+        "protocol": "SMB",
+        "mac": "AA:BB:CC:DD:EE:FF"
+    },
+    {
+        "letter": "Y",
+        "path": "gdrive:Backup",
+        "username": "",
+        "password": "",
+        "label": "Google Drive Backup",
+        "protocol": "Cloud (Rclone)",
+        "mac": ""
+    }
+]
+```
+
+FIELDS:
+• letter: Single uppercase letter (A-Z)
+• path: Network path or rclone remote
+• username: Authentication username (empty for none)
+• password: Authentication password (empty for none)
+• label: Display name
+• protocol: "SMB", "SFTP", "WebDAV", "NFS", "Cloud (Rclone)"
+• mac: MAC address for WoL (optional)
+
+MANUAL EDITING:
+
+You can edit network_vault.json directly:
+1. Close DriveMapper Pro
+2. Open network_vault.json in text editor
+3. Make changes (follow JSON syntax)
+4. Save file
+5. Restart DriveMapper Pro
+
+VALIDATION:
+Invalid JSON will cause DriveMapper Pro to fail loading configurations.
+Use online JSON validator before saving.
+
+
+SYNC_PROFILES.JSON STRUCTURE:
+
+```json
+[
+    {
+        "name": "Documents Backup",
+        "source": "C:\\Users\\Me\\Documents",
+        "destination": "gdrive:Backup/Documents",
+        "bidirectional": true,
+        "delete_on_dest": false,
+        "check_access": true,
+        "resync_needed": false,
+        "conflict_resolve": "newer",
+        "created": "2025-02-07T10:30:00.000000"
+    }
+]
+```
+
+FIELDS:
+• name: Profile display name
+• source: Source path
+• destination: Destination path
+• bidirectional: true = bisync, false = sync
+• delete_on_dest: Delete extra files (one-way sync only)
+• check_access: Add --check-access flag
+• resync_needed: Add --resync flag (auto-clears after run)
+• conflict_resolve: "none", "newer", "older", etc.
+• created: ISO timestamp of creation
+
+MANUAL EDITING:
+Same process as network_vault.json.
+Be careful with boolean values (true/false lowercase).
+
+
+18.2 CUSTOM RCLONE FLAGS
+─────────────────────────────────────────────────────────────────────────
+
+MODIFYING DRIVEMAPPER PRO:
+
+To add custom rclone flags, edit the Python source:
+
+Location: drivemapper_pro_v6.0_COMPLETE.py
+
+SYNC COMMAND (around line 1500):
+
+Current:
+```python
+cmd = ["rclone", "bisync", profile['source'], profile['destination']]
+cmd.extend(["--progress", "--verbose"])
+```
+
+Add custom flags:
+```python
+cmd = ["rclone", "bisync", profile['source'], profile['destination']]
+cmd.extend(["--progress", "--verbose"])
+cmd.extend(["--fast-list"])  # Custom flag
+cmd.extend(["--drive-chunk-size", "256M"])  # Custom flag with value
+```
+
+MOUNT COMMAND (around line 680):
+
+Current:
+```python
+cmd = [
+    "rclone", "mount",
+    path,
+    f"{letter}:",
+    "--vfs-cache-mode", "writes",
+    "--no-console"
+]
+```
+
+Add custom flags:
+```python
+cmd = [
+    "rclone", "mount",
+    path,
+    f"{letter}:",
+    "--vfs-cache-mode", "full",  # Changed from "writes"
+    "--vfs-cache-max-size", "10G",  # Custom flag
+    "--no-console"
+]
+```
+
+USEFUL FLAGS TO ADD:
+
+Performance:
+--fast-list - Use recursive list (faster for large directories)
+--transfers 8 - Parallel transfers (default 4)
+--checkers 16 - Parallel checks (default 8)
+
+Filtering:
+--exclude "*.tmp" - Exclude temporary files
+--include "*.jpg" - Include only specific files
+--max-age 30d - Only files modified in last 30 days
+
+Bandwidth:
+--bwlimit 10M - Limit to 10 MB/s
+--bwlimit 08:00,10M 18:00,off - Time-based limits
+
+Google Drive Specific:
+--drive-chunk-size 256M - Larger chunks for big files
+--drive-upload-cutoff 100M - Cutoff for multipart
+--drive-acknowledge-abuse - Bypass virus scan for large files
+
+
+18.3 ADVANCED SYNC OPTIONS
+─────────────────────────────────────────────────────────────────────────
+
+FILTERS FILE:
+
+Create a file named "filters.txt":
+```
+# Exclude rules
+- *.tmp
+- *.bak
+- Thumbs.db
+- .DS_Store
+- desktop.ini
+
+# Include rules
++ *.jpg
++ *.png
++ *.pdf
+
+# Exclude everything else
+- *
+```
+
+Modify sync command to use it:
+```python
+cmd.extend(["--filter-from", "filters.txt"])
+```
+
+COMPARISON METHODS:
+
+Default:
+--compare size,modtime
+
+Alternatives:
+--compare checksum - Use MD5/SHA1 (slower but accurate)
+--compare size - Size only (fast but less reliable)
+
+Modify in code:
+```python
+cmd.extend(["--compare", "checksum"])
+```
+
+CONFLICT HANDLING OPTIONS:
+
+Beyond conflict_resolve, rclone bisync offers:
+--conflict-loser num - Keep both with number suffix
+--conflict-loser delete - Delete loser
+--conflict-loser pathname - Rename with path
+
+Example:
+```python
+cmd.extend(["--conflict-loser", "num"])
+```
+
+ADVANCED BISYNC FLAGS:
+
+--check-filename - Custom check file name (default: RCLONE_TEST)
+--resync-mode - Control resync behavior
+--resilient - Continue on errors
+--recover - Recover from interrupted sync
+
+SCHEDULING CONSIDERATIONS:
+
+When running from Task Scheduler, consider:
+--retries 3 - Retry failed transfers
+--log-level INFO - Adjust log verbosity
+--syslog - Send logs to Windows Event Log
+
+DRY RUN MODE:
+
+Test syncs without making changes:
+```python
+cmd.extend(["--dry-run"])
+```
+
+Useful for:
+• Testing new sync profiles
+• Verifying what will be synced
+• Debugging filter rules
+
+
+═══════════════════════════════════════════════════════════════════════════
+PART VI: REFERENCE
+═══════════════════════════════════════════════════════════════════════════
+
+
+CHAPTER 19: COMPLETE FEATURE REFERENCE
+═══════════════════════════════════════════════════════════════════════════
+
+19.1 ALL BUTTONS & FUNCTIONS
+─────────────────────────────────────────────────────────────────────────
+
+HEADER BUTTONS:
+
+☁️ Rclone Config:
+Opens rclone configuration in console window.
+Use to configure cloud remotes.
+
+📜 Logs:
+Opens drive_events.log in Notepad.
+View application logs and errors.
+
+❓ Help:
+Opens help window with quick reference.
+Links to this manual.
+
+❌ Exit:
+Exits DriveMapper Pro completely.
+Asks for confirmation first.
+
+
+DRIVE MAPPER TAB - ADD DRIVE SECTION:
+
+Protocol Dropdown:
+Selects protocol type: SMB, SFTP, WebDAV, NFS, Cloud (Rclone)
+Changes placeholder text automatically.
+
+Drive Letter Entry:
+Enter single letter (A-Z) for drive mapping.
+Auto-suggests next available letter.
+
+Network Path Entry:
+Enter path based on selected protocol.
+Format changes per protocol.
+
+MAC Address Entry:
+Optional MAC address for Wake-on-LAN.
+Format: AA:BB:CC:DD:EE:FF or AA-BB-CC-DD-EE-FF
+
+Username Entry:
+Authentication username if needed.
+Leave blank for no authentication.
+
+Password Entry:
+Authentication password if needed.
+Masked with asterisks for security.
+
+Display Name Entry:
+Friendly name for this drive.
+Defaults to path if left blank.
+
+✅ Validate & Add Button:
+Tests connection and adds drive to profiles.
+Shows success/failure message.
+
+
+DRIVE MAPPER TAB - STATUS SECTION:
+
+Live Drive Status Display:
+Shows all mapped drives with paths and latency.
+Also shows active server connections.
+
+🔄 Refresh Button:
+Manually refresh drive status display.
+Updates immediately.
+
+🔍 Test Button:
+Opens diagnostic window showing three detection methods.
+Use when drives not showing in status.
+
+🔧 Prepare Button:
+Establishes server-level connections.
+Run before mapping multiple drives from same server.
+
+🔓 Clear Button:
+Clears all server connections without unmapping drives.
+Use to reset authentication state.
+
+
+DRIVE MAPPER TAB - PROFILES SECTION:
+
+▶▶ Map All Button:
+Maps all saved drive configurations.
+Automatically prepares servers first.
+
+⏹ Disconnect All Button:
+Disconnects all network drives and stops rclone mounts.
+Asks for confirmation first.
+
+Per-Drive Buttons:
+
+▶ Map:
+Maps this specific drive.
+
+⚡ Wake:
+Sends Wake-on-LAN packet to device (if MAC configured).
+
+☁️ Sync:
+Quick sync for cloud drives (prompts for local folder).
+
+📋 Clone:
+Copies this drive's settings to add form.
+Pre-fills next available letter.
+
+🗑️ Del:
+Deletes this drive configuration.
+Asks for confirmation first.
+
+
+SYNC MANAGER TAB - ADD SYNC SECTION:
+
+Profile Name Entry:
+Name for this sync profile.
+
+Source Location Entry:
+Where to sync FROM.
+
+📁 Browse Button (Source):
+Opens folder browser for local directories.
+
+Destination Location Entry:
+Where to sync TO.
+
+📁 Browse Button (Dest):
+Opens folder browser for local directories.
+
+Bidirectional Checkbox:
+Enable for two-way sync (bisync).
+Disable for one-way sync.
+
+Delete on Destination Checkbox:
+(One-way only) Delete extra files on destination.
+
+Check Access Checkbox:
+Add --check-access flag (recommended for bisync).
+
+Force Resync Checkbox:
+Run with --resync flag (for first sync or after issues).
+
+Conflict Resolution Dropdown:
+Choose strategy: none, newer, older, larger, smaller, path1, path2.
+
+💾 Save Sync Profile Button:
+Saves this sync profile.
+
+
+SYNC MANAGER TAB - PROFILES SECTION:
+
+Per-Profile Buttons:
+
+🔄 Sync Now:
+Runs this sync profile.
+Opens console window with progress.
+
+📜 Log:
+Opens sync log file in Notepad.
+
+🗑️ Delete:
+Deletes this sync profile.
+Asks for confirmation first.
+
+
+19.2 KEYBOARD SHORTCUTS
+─────────────────────────────────────────────────────────────────────────
+
+CURRENTLY SUPPORTED:
+
+(None currently implemented)
+
+POTENTIAL SHORTCUTS TO ADD:
+
+You can modify the code to add:
+Ctrl+M - Map All
+Ctrl+D - Disconnect All
+Ctrl+R - Refresh Status
+Ctrl+S - Save (after editing)
+F5 - Refresh
+F1 - Help
+
+To add shortcuts, edit the Python source and add key bindings.
+
+
+19.3 CONFIGURATION FILE FORMAT
+─────────────────────────────────────────────────────────────────────────
+
+NETWORK_VAULT.JSON:
+
+```json
+[
+    {
+        "letter": "Z",
+        "path": "\\\\server\\share",
+        "username": "user",
+        "password": "pass",
+        "label": "Display Name",
+        "protocol": "SMB",
+        "mac": "AA:BB:CC:DD:EE:FF"
+    }
+]
+```
+
+REQUIRED FIELDS:
+• letter
+• path
+• protocol
+
+OPTIONAL FIELDS:
+• username (defaults to "")
+• password (defaults to "")
+• label (defaults to path)
+• mac (defaults to "")
+
+SYNC_PROFILES.JSON:
+
+```json
+[
+    {
+        "name": "Profile Name",
+        "source": "C:\\Source",
+        "destination": "remote:dest",
+        "bidirectional": true,
+        "delete_on_dest": false,
+        "check_access": true,
+        "resync_needed": false,
+        "conflict_resolve": "newer",
+        "created": "2025-02-07T10:00:00.000000"
+    }
+]
+```
+
+ALL FIELDS REQUIRED.
+
+VALUES:
+• bidirectional: true or false
+• delete_on_dest: true or false
+• check_access: true or false
+• resync_needed: true or false
+• conflict_resolve: "none", "newer", "older", "larger", "smaller", "path1", "path2"
+
+
+19.4 ERROR CODES
+─────────────────────────────────────────────────────────────────────────
+
+WINDOWS ERROR CODES:
+
+85: "The local device name is already in use"
+• Drive letter already mapped
+• Solution: Choose different letter or disconnect existing
+
+53: "The network path was not found"
+• Server or share doesn't exist
+• Server is offline
+• Solution: Verify path, check server status
+
+1219: "Multiple connections...using more than one user name"
+• Windows credential conflict
+• Solution: Use Prepare button, ensure same credentials
+
+1326: "Logon failure: unknown user name or bad password"
+• Incorrect credentials
+• Account locked
+• Solution: Verify username/password
+
+5: "Access is denied"
+• Insufficient permissions
+• Solution: Check share and NTFS permissions
+
+64: "The specified network name is no longer available"
+• Network connection lost
+• Server went offline
+• Solution: Check network, verify server
+
+67: "The network name cannot be found"
+• Name resolution failure
+• Solution: Use IP address instead of hostname
+
+1203: "The user has not been granted the requested logon type"
+• Policy restriction
+• Solution: Check server security policy
+
+1231: "The network location cannot be reached"
+• Network routing issue
+• Firewall blocking
+• Solution: Check network connectivity, firewall
+
+RCLONE ERROR CODES:
+
+Exit Code 0: Success
+Exit Code 1: Syntax or usage error
+Exit Code 2: Error not otherwise categorized
+Exit Code 3: Directory not found
+Exit Code 4: File not found
+Exit Code 5: Temporary error (retry)
+Exit Code 6: Less serious errors
+Exit Code 7: Fatal error
+Exit Code 8: Transfer exceeded --max-transfer
+Exit Code 9: Operation successful, but checks failed
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+
+CHAPTER 20: FAQ
+═══════════════════════════════════════════════════════════════════════════
+
+20.1 GENERAL QUESTIONS
+─────────────────────────────────────────────────────────────────────────
+
+Q: Do I need administrator privileges?
+A: Not for most operations. Administrator needed for:
+   - Installing NFS client
+   - Mapping drives on some restricted systems
+   - Running as Windows Service
+
+Q: Does DriveMapper Pro work on Windows Home?
+A: Yes! All features work on Windows 10/11 Home, except:
+   - NFS (requires Pro/Enterprise)
+   - Group Policy features (domain environments)
+
+Q: Can I use DriveMapper Pro on multiple computers?
+A: Yes. Copy the config files (network_vault.json, sync_profiles.json)
+   to each computer. Adjust drive letters if needed.
+
+Q: Will mapped drives persist after reboot?
+A: Network drives mapped with DriveMapper Pro are temporary by default.
+   Use "Map All" on startup (create shortcut in Startup folder) or
+   modify code to add CONNECT_UPDATE_PROFILE flag.
+
+Q: How do I uninstall DriveMapper Pro?
+A: 1. Disconnect all drives
+   2. Delete the application folder
+   3. Remove any scheduled tasks
+   That's it! No registry changes or system files.
+
+Q: Is my data safe?
+A: DriveMapper Pro doesn't modify your files. It only creates mappings
+   and runs rclone commands. However:
+   - Sync operations CAN delete files (if configured)
+   - Always test with --dry-run first
+   - Keep backups of important data
+
+
+20.2 DRIVE MAPPING QUESTIONS
+─────────────────────────────────────────────────────────────────────────
+
+Q: Why can't I map more than one drive from the same server?
+A: Error 1219 - Windows limitation. Solution:
+   - Use "Prepare" button before mapping
+   - Ensure same credentials for all shares on same server
+
+Q: My drive shows in Explorer but not in DriveMapper Pro status.
+A: Click "Refresh" or "Test" button. If neither detection method shows it,
+   it may not be a true network drive (type 4).
+
+Q: Can I map the same share to multiple drive letters?
+A: Yes, but not recommended. Creates duplicate connections.
+
+Q: Drive letter changes after reboot.
+A: Drive letters are first-come-first-served. To ensure consistency:
+   - Use letters Z,Y,X working backwards (less likely to conflict)
+   - Map drives in same order each time
+   - Avoid using common letters (D,E,F often used by USB drives)
+
+Q: How do I map a drive without credentials?
+A: Leave username and password fields blank. This attempts guest access.
+
+Q: Can I access the same drive from multiple computers?
+A: Yes! Each computer can map the same network share independently.
+
+Q: Cloud drive is slow.
+A: Normal for cloud storage. Factors:
+   - Internet speed
+   - Cloud provider performance
+   - File sizes (many small files = slower)
+   - Rclone cache settings
+   
+   Improvements:
+   - Use --vfs-cache-mode full
+   - Increase cache size
+   - Pre-download frequently used files
+
+
+20.3 SYNC MANAGER QUESTIONS
+─────────────────────────────────────────────────────────────────────────
+
+Q: What's the difference between bisync and sync?
+A: bisync = two-way (changes go both directions)
+   sync = one-way (source → destination only)
+
+Q: Can I recover deleted files?
+A: No, Sync Manager doesn't keep version history.
+   Consider:
+   - Cloud storage with versioning enabled
+   - Separate backup strategy
+   - Testing with --dry-run first
+
+Q: How do I handle conflicts?
+A: Configure conflict_resolve strategy:
+   - "none": Both versions kept
+   - "newer": Newest wins
+   - Other strategies available
+
+Q: Can I sync while working on files?
+A: Not recommended. Results undefined. Best practice:
+   - Close files before syncing
+   - Don't work on both sides simultaneously
+   - Sync at start/end of work session
+
+Q: How often should I sync?
+A: Depends on use case:
+   - Critical data: Hourly or more
+   - Regular backups: Daily
+   - Archival: Weekly/monthly
+   
+   More frequent = less divergence = fewer conflicts
+
+Q: Can I schedule syncs?
+A: Yes! Use Windows Task Scheduler with rclone commands.
+   See Chapter 15.4 for instructions.
+
+Q: Sync is taking forever.
+A: First sync transfers everything (can be slow).
+   Subsequent syncs only transfer changes.
+   
+   For large datasets:
+   - Run overnight
+   - Consider initial transfer via physical media
+   - Use --max-transfer to limit per-run
+
+Q: Can I sync to multiple destinations?
+A: Yes! Create separate sync profiles for each destination.
+   Example:
+   - Profile 1: Local → Google Drive
+   - Profile 2: Local → OneDrive
+   - Profile 3: Local → NAS
+
+
+20.4 TECHNICAL QUESTIONS
+─────────────────────────────────────────────────────────────────────────
+
+Q: What happens if I close DriveMapper Pro?
+A: Mapped drives remain mapped! DriveMapper Pro is just a management tool.
+   To disconnect: Use "Disconnect All" before closing.
+
+Q: Do I need to keep DriveMapper Pro running?
+A: No. Once drives are mapped, DriveMapper Pro can be closed.
+   However, running it provides:
+   - Status monitoring
+   - Easy disconnect
+   - Quick access to sync functions
+
+Q: How secure is storing passwords in the config file?
+A: Passwords are stored in PLAIN TEXT. Security measures:
+   - Set file permissions (only you can read)
+   - Use BitLocker for disk encryption
+   - Don't store config on network/cloud
+   - Use Windows Credential Manager when possible
+
+Q: Can I run multiple instances?
+A: Not recommended. Could cause conflicts with config files.
+
+Q: Does DriveMapper Pro use much resources?
+A: Very light:
+   - ~50 MB RAM
+   - Minimal CPU
+   - No impact when idle
+   
+   Rclone mounts use more resources depending on activity.
+
+Q: Can I use DriveMapper Pro commercially?
+A: Check the license. Generally:
+   - Personal use: Free
+   - Commercial use: May require license
+   - Rclone: Open source (MIT license)
+
+Q: How do I report bugs?
+A: Check for updated versions first.
+   Provide:
+   - DriveMapper Pro version
+   - Windows version
+   - drive_events.log file
+   - Steps to reproduce
+
+Q: Can I contribute to development?
+A: DriveMapper Pro is a Python application.
+   You can:
+   - Modify source code
+   - Add features
+   - Share improvements
+   
+   Python skills required.
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+
+CHAPTER 21: GLOSSARY
+═══════════════════════════════════════════════════════════════════════════
+
+BISYNC:
+Bidirectional synchronization. Keeps two locations identical by syncing
+changes in both directions.
+
+CIFS:
+Common Internet File System. Another name for SMB (Server Message Block).
+Used interchangeably with SMB.
+
+CONFLICT:
+When the same file is modified on both sides of a bidirectional sync
+between sync runs.
+
+DRIVE LETTER:
+Single letter (A-Z) assigned to a storage location in Windows.
+Examples: C:, Z:, Y:
+
+DRIVE MAPPING:
+Process of assigning a drive letter to a network location, making it
+appear as a local drive.
+
+ERROR 1219:
+Windows error preventing multiple connections to same server with
+different credentials.
+
+IPC$:
+Inter-Process Communication share. Administrative share used for
+server-level authentication. Doesn't appear as a mapped drive.
+
+MOUNT:
+Process of making a remote filesystem available at a local path.
+In DriveMapper Pro context, used for cloud storage, SFTP, WebDAV.
+
+NAS:
+Network Attached Storage. Device providing file-level data storage
+over a network.
+
+NETRESOURCE:
+Windows structure defining a network resource (used in drive mapping API).
+
+NFS:
+Network File System. Unix/Linux file sharing protocol.
+
+ONE-WAY SYNC:
+Synchronization where changes only go from source to destination.
+Destination becomes mirror of source.
+
+RCLONE:
+Command-line program for syncing files with cloud storage and other
+remote locations.
+
+REMOTE:
+In rclone context, a configured connection to cloud storage or remote
+location.
+
+RESYNC:
+Rclone bisync operation that rebuilds baseline without sync history.
+Required for first sync or after issues.
+
+SMB:
+Server Message Block. Windows file sharing protocol. Used for
+network drives.
+
+SFTP:
+SSH File Transfer Protocol. Secure file transfer protocol using SSH.
+
+SYNC PROFILE:
+Named configuration defining a synchronization task with all its
+settings.
+
+UNC PATH:
+Universal Naming Convention path. Format: \\server\share
+Used for accessing network resources.
+
+VFS:
+Virtual File System. Rclone feature that makes cloud storage appear
+as local filesystem.
+
+WEBDAV:
+Web Distributed Authoring and Versioning. HTTP-based file access
+protocol.
+
+WOL:
+Wake-on-LAN. Protocol for waking up sleeping computers via network.
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+
+CHAPTER 22: INDEX
+═══════════════════════════════════════════════════════════════════════════
+
+A
+Access denied error ..................................... 53
+Adding drives .......................................... 10
+Authentication ...................................... 14, 53
+Automated tasks ........................................ 59
+
+B
+Backup best practices .................................. 33
+Batch scripting ........................................ 59
+Bidirectional sync ................................. 35, 40
+Bisync ................................................. 35
+
+C
+Clone feature .......................................... 28
+Cloud storage .......................................... 20
+Command line integration ............................... 59
+Configuration backup ................................... 56
+Configuration files .................................. 7, 65
+Conflict resolution .................................... 37
+Customization .......................................... 65
+
+D
+Diagnostic tools ....................................... 53
+Drive letters .......................................... 10
+Drive mapping basics ................................... 10
+
+E
+Error 1219 ......................................... 16, 48
+Error codes ............................................ 68
+
+F
+FAQ .................................................... 73
+File permissions ....................................... 62
+Filtering .............................................. 65
+
+G
+Glossary ............................................... 78
+
+H
+Help system ............................................ 5
+
+I
+Installation ........................................... 7
+IPC$ share ............................................. 62
+
+K
+Keyboard shortcuts ..................................... 68
+
+L
+Logging ................................................ 53
+
+M
+Manual sync execution .................................. 40
+Mapping vs mounting .................................... 12
+Maintenance ............................................ 56
+Multiple servers ....................................... 18
+
+N
+Network architecture ................................... 62
+NFS .................................................... 26
+
+O
+One-way sync ........................................... 36
+
+P
+Performance optimization ............................... 21
+Performance tuning ..................................... 56
+Protocols supported .................................... 11
+
+R
+Rclone commands ........................................ 59
+Rclone configuration ................................... 20
+Resync ................................................. 40
+
+S
+Scheduled tasks ........................................ 56
+Scripting .............................................. 59
+Security ............................................... 57
+Server connections ..................................... 14
+Server preparation ..................................... 28
+SFTP ................................................... 24
+SMB/CIFS ............................................... 14
+Status monitoring ...................................... 28
+Sync conflicts ......................................... 51
+Sync log viewing ....................................... 42
+Sync Manager overview .................................. 33
+Sync profiles .......................................... 35
+Sync scenarios ......................................... 43
+System requirements .................................... 6
+
+T
+Test button ............................................ 53
+Troubleshooting ........................................ 48
+
+U
+UNC paths .............................................. 11
+
+V
+Validation ............................................. 10
+
+W
+Wake-on-LAN ............................................ 28
+WebDAV ................................................. 24
+Windows network stack .................................. 62
+
+
+═══════════════════════════════════════════════════════════════════════════
+                                END OF MANUAL
+═══════════════════════════════════════════════════════════════════════════
+
+DriveMapper Pro v6.0 Complete Edition
+User Manual Version 1.0
+February 2025
+
+For updates and support, check the application's Help menu.
+For rclone documentation: https://rclone.org/docs/
+
+Thank you for using DriveMapper Pro!

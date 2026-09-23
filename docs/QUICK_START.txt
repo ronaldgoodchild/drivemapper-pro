@@ -1,0 +1,263 @@
+═══════════════════════════════════════════════════════════════
+   DRIVEMAPPER PRO v6.0 - QUICK START GUIDE
+═══════════════════════════════════════════════════════════════
+
+WELCOME!
+This guide gets you up and running in 5 minutes.
+For complete documentation, see DRIVEMAPPER_PRO_USER_MANUAL.txt
+
+═══════════════════════════════════════════════════════════════
+STEP 1: INSTALL REQUIREMENTS (First Time Only)
+═══════════════════════════════════════════════════════════════
+
+Open Command Prompt as Administrator and run:
+
+    pip install customtkinter pywin32
+
+Download rclone from https://rclone.org/downloads/
+Extract rclone.exe to C:\Windows
+
+
+═══════════════════════════════════════════════════════════════
+STEP 2: LAUNCH DRIVEMAPPER PRO
+═══════════════════════════════════════════════════════════════
+
+Double-click: drivemapper_pro_v6.0_COMPLETE.py
+
+OR open Command Prompt and run:
+    python drivemapper_pro_v6.0_COMPLETE.py
+
+
+═══════════════════════════════════════════════════════════════
+STEP 3: MAP YOUR FIRST DRIVE (Drive Mapper Tab)
+═══════════════════════════════════════════════════════════════
+
+1. Select protocol (e.g., "SMB" for Windows shares)
+
+2. Drive letter: Z (or any available letter)
+
+3. Enter network path:
+   • SMB: \\192.168.1.50\Media
+   • Cloud: gdrive:Backup
+   • SFTP: myserver.com
+
+4. Enter username and password (if needed)
+
+5. Click "✅ Validate & Add"
+
+6. Click "▶ Map" to map the drive
+
+7. Check File Explorer - your drive should appear!
+
+
+═══════════════════════════════════════════════════════════════
+STEP 4: CREATE A SYNC PROFILE (Sync Manager Tab)
+═══════════════════════════════════════════════════════════════
+
+1. Switch to "Sync Manager" tab
+
+2. Enter profile name: "My Documents Backup"
+
+3. Source: C:\Users\YourName\Documents
+
+4. Destination: gdrive:Backup/Documents
+
+5. Check "Bidirectional" for two-way sync
+   OR leave unchecked for one-way backup
+
+6. For first sync, check "Force resync"
+
+7. Click "💾 Save Sync Profile"
+
+8. Click "🔄 Sync Now" to run sync
+
+9. Console window shows progress
+
+
+═══════════════════════════════════════════════════════════════
+IMPORTANT TIPS
+═══════════════════════════════════════════════════════════════
+
+ERROR 1219 (Multiple shares from same server):
+• All shares from \\192.168.1.50 must use SAME credentials
+• Click "🔧 Prepare" before "▶▶ Map All"
+• Use "📋 Clone" to duplicate drive with same credentials
+
+CLOUD STORAGE:
+• Click "☁️ Rclone Config" to set up cloud remotes first
+• Then use remotename: as path
+
+WAKE-ON-LAN:
+• Enter MAC address when adding drive
+• Click "⚡ Wake" before mapping
+
+TROUBLESHOOTING:
+• Click "📜 Logs" to view detailed logs
+• Click "🔍 Test" to diagnose drive detection
+• See full manual for detailed solutions
+
+
+═══════════════════════════════════════════════════════════════
+COMMON SCENARIOS
+═══════════════════════════════════════════════════════════════
+
+SCENARIO 1: Map 4 shares from same server
+────────────────────────────────────────────
+Problem: Error 1219 when mapping multiple shares
+
+Solution:
+1. Add first share (Z: → \\server\share1) with credentials
+2. Click "📋 Clone" on Z:
+3. Change path to \share2, keep credentials
+4. Repeat for remaining shares
+5. Click "🔧 Prepare"
+6. Click "▶▶ Map All"
+
+
+SCENARIO 2: Backup to Google Drive
+────────────────────────────────────────────
+1. Click "☁️ Rclone Config"
+2. Create "gdrive" remote (follow prompts)
+3. Go to Sync Manager tab
+4. Profile name: "Documents Backup"
+5. Source: C:\Documents
+6. Destination: gdrive:Backup
+7. Uncheck bidirectional (one-way backup)
+8. Check "Delete files on destination"
+9. Check "Force resync"
+10. Save and run sync
+
+
+SCENARIO 3: Sync laptop and desktop via cloud
+────────────────────────────────────────────
+On both computers:
+1. Create same cloud remote (e.g., "gdrive")
+2. Profile name: "Work Files"
+3. Source: C:\Work
+4. Destination: gdrive:WorkSync
+5. Check "Bidirectional"
+6. Conflict resolution: "newer"
+7. Save profile
+
+Workflow:
+• Laptop: Make changes, run sync
+• Desktop: Run sync, get changes from laptop
+
+
+═══════════════════════════════════════════════════════════════
+BUTTON REFERENCE
+═══════════════════════════════════════════════════════════════
+
+HEADER:
+☁️ Rclone Config - Configure cloud remotes
+📜 Logs - View application logs
+❓ Help - Quick help
+❌ Exit - Exit application
+
+DRIVE MAPPER:
+✅ Validate & Add - Test and save drive
+🔄 Refresh - Update status display
+🔍 Test - Diagnostic tool
+🔧 Prepare - Setup server connections
+🔓 Clear - Clear server connections
+▶▶ Map All - Map all saved drives
+⏹ Disconnect All - Disconnect everything
+
+PER DRIVE:
+▶ Map - Map this drive
+⚡ Wake - Wake device via WoL
+☁️ Sync - Quick cloud sync
+📋 Clone - Duplicate drive settings
+🗑️ Del - Delete configuration
+
+SYNC MANAGER:
+💾 Save Sync Profile - Save new profile
+🔄 Sync Now - Run sync
+📜 Log - View sync log
+🗑️ Delete - Delete profile
+
+
+═══════════════════════════════════════════════════════════════
+KEYBOARD SHORTCUTS
+═══════════════════════════════════════════════════════════════
+
+None currently implemented.
+See manual for how to add custom shortcuts.
+
+
+═══════════════════════════════════════════════════════════════
+SUPPORT & DOCUMENTATION
+═══════════════════════════════════════════════════════════════
+
+Full Manual: DRIVEMAPPER_PRO_USER_MANUAL.txt (80+ pages)
+Covers:
+• Detailed setup instructions
+• All protocols (SMB, NFS, SFTP, WebDAV, Cloud)
+• Complete sync documentation
+• Troubleshooting guide
+• Advanced customization
+• Network architecture
+• Security considerations
+• FAQ and glossary
+
+Rclone Documentation: https://rclone.org/docs/
+
+Log Files:
+• drive_events.log - Application log
+• sync_ProfileName.log - Sync logs
+
+
+═══════════════════════════════════════════════════════════════
+FILE LOCATIONS
+═══════════════════════════════════════════════════════════════
+
+Configuration Files (same folder as .py):
+• network_vault.json - Saved drives
+• sync_profiles.json - Sync profiles
+• drive_events.log - Application log
+• sync_*.log - Sync logs
+
+BACKUP THESE FILES!
+
+
+═══════════════════════════════════════════════════════════════
+GETTING HELP
+═══════════════════════════════════════════════════════════════
+
+1. Check logs (📜 button)
+2. Use Test tool (🔍 button)
+3. Read error codes in manual
+4. Review FAQ in manual
+5. Check rclone docs for cloud issues
+
+
+═══════════════════════════════════════════════════════════════
+WHAT'S NEW IN v6.0
+═══════════════════════════════════════════════════════════════
+
+✨ NEW: Sync Manager Tab
+   • Bidirectional sync (rclone bisync)
+   • One-way sync
+   • Profile-based management
+   • Conflict resolution strategies
+
+✨ NEW: Tabbed Interface
+   • Drive Mapper tab
+   • Sync Manager tab
+   • Cleaner organization
+
+✓ IMPROVED: Error 1219 handling
+✓ IMPROVED: Drive detection
+✓ IMPROVED: Status monitoring
+✓ CARRIED FORWARD: Clone feature, WoL, all v5.x features
+
+
+═══════════════════════════════════════════════════════════════
+
+That's it! You're ready to use DriveMapper Pro.
+
+For complete documentation, see the full user manual.
+
+Happy mapping and syncing! 🚀
+
+═══════════════════════════════════════════════════════════════

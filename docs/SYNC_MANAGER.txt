@@ -1,0 +1,100 @@
+═══════════════════════════════════════════════════════════════
+     DRIVEMAPPER PRO v5.6 - SYNC MANAGER FEATURE GUIDE
+═══════════════════════════════════════════════════════════════
+
+🎉 NEW IN v5.6: DEDICATED SYNC MANAGER TAB
+
+The app now has TWO tabs:
+  🗂️ Drive Mapper - Map network drives (existing functionality)
+  🔄 Sync Manager - Synchronize directories (NEW!)
+
+The Sync Manager lets you synchronize directories between:
+  ✓ Local folders (C:\Documents → D:\Backup)
+  ✓ Network shares (C:\Photos → \\NAS\Backup)
+  ✓ Cloud storage (C:\Files → MyCloud:Backup)
+  ✓ FTP servers (using rclone remotes)
+  ✓ Any combination of the above!
+
+KEY FEATURES:
+• Save sync profiles for repeated use
+• Three sync directions (Source→Dest, Dest→Source, Bidirectional)
+• Optional delete mode (removes files not in source)
+• Progress display in console window
+• Uses rclone (powerful, reliable, supports everything)
+
+
+HOW TO CREATE A SYNC PROFILE:
+═══════════════════════════════════════════════════════════════
+
+1. Profile Name: Give it a descriptive name
+2. Source: Type or browse (📁) for source directory
+3. Destination: Type or browse (📁) for destination
+4. Direction: Choose how data flows
+5. Delete Option: Check to mirror exactly (removes extra files)
+6. Click "💾 Save Sync Profile"
+
+
+SYNC DIRECTIONS:
+═══════════════════════════════════════════════════════════════
+
+Source → Dest: Copy from source to destination (most common)
+Dest → Source: Copy from destination to source (pull mode)
+Bidirectional: Keep both sides in sync (changes go both ways)
+
+
+EXAMPLE PROFILES:
+═══════════════════════════════════════════════════════════════
+
+Backup Documents to NAS:
+  Name: Daily Documents Backup
+  Source: C:\Users\You\Documents
+  Dest: \\192.168.1.50\backup\documents
+  Direction: Source → Dest
+  Delete: ☑ (exact mirror)
+
+Sync Photos with Cloud:
+  Name: Photo Cloud Sync
+  Source: C:\Users\You\Pictures
+  Dest: GoogleDrive:Photos
+  Direction: Bidirectional
+  Delete: ☐ (keep everything)
+
+FTP Backup:
+  Name: Backup to FTP
+  Source: C:\WebsiteFiles
+  Dest: MyFTP:/backup
+  Direction: Source → Dest
+  Delete: ☑
+
+
+PATHS YOU CAN USE:
+═══════════════════════════════════════════════════════════════
+
+Local:   C:\Users\John\Documents
+Network: \\server\share\folder or \\192.168.1.50\c\Data
+Cloud:   MyCloud:Backup  (requires rclone remote setup)
+FTP:     MyFTP:Backup   (requires rclone remote setup)
+
+
+TIPS:
+═══════════════════════════════════════════════════════════════
+
+• Test WITHOUT delete first to see what happens
+• Use descriptive profile names
+• Watch the console window for progress
+• For cloud/FTP, setup rclone remote first (☁️ Rclone Config)
+• Map network shares as drives first if they need credentials
+
+
+TROUBLESHOOTING:
+═══════════════════════════════════════════════════════════════
+
+"rclone not recognized" → Install from https://rclone.org
+"Path not found" → Check paths, use 📁 browser
+"No files transfer" → Check permissions and console errors
+"Sync slow" → Large files or slow connection - be patient
+
+
+═══════════════════════════════════════════════════════════════
+Check drive_events.log for detailed sync logs!
+═══════════════════════════════════════════════════════════════

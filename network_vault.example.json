@@ -1,0 +1,11 @@
+[
+  {
+    "label": "Media (example)",
+    "path": "\\\\192.168.1.50\\Media",
+    "username": "exampleuser",
+    "mac": "AA:BB:CC:DD:EE:FF",
+    "letter": "Z",
+    "password": "CHANGE_ME",
+    "protocol": "SMB"
+  }
+]
