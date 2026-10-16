@@ -4,6 +4,7 @@ Reconstructed from the original development history (February 2026). Older build
 outside this repo; see "History" in the README of the archive if you need them.
 
 ## [Unreleased]
+- Windows EXE (6.0.0) published on the Releases page with SHA-256.
 - Security: share passwords are now stored in Windows Credential Manager (via `keyring`) instead of plain text in `network_vault.json`; existing vaults are migrated automatically on first launch
 - Falls back to plain text with a visible warning if the credential vault is unavailable, so passwords are never silently lost
 - Added `keyring` to requirements

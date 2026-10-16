@@ -9,6 +9,12 @@ A free Windows GUI for people who manage lots of network drives: map SMB shares,
 ![Drive mapping with saved profiles and live status (fictional demo data)](docs/screenshots/main.png)
 *Drive mapping with saved profiles and live status (fictional demo data)*
 
+## Download
+
+Grab **DriveMapper-Pro-6.0.0-win64.exe** from the [latest release](https://github.com/ronaldgoodchild/drivemapper-pro/releases/latest) - no Python needed.
+
+The EXE is unsigned, so Windows SmartScreen or your antivirus may warn about it. Verify the download against the `.sha256` file on the release (`certutil -hashfile <file> SHA256`), or run it from source as described below.
+
 ## Features
 
 - **Drive mapper** - map/unmap network drives, pick drive letters, save credentials per share
